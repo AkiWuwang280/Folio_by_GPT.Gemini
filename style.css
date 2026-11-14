@@ -1,90 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&display=swap');
-:root{--folio-serif:'Noto Serif SC','Source Han Serif SC','Songti SC','SimSun',serif;--folio-sans:'Noto Sans SC','Source Han Sans SC','PingFang SC','Microsoft YaHei',sans-serif;--folio-read-size:calc(var(--mainFontSize,16px)*1.06);--st-mes-line-height:1.95;--st-mes-paragraph-gap:.75em;--mz-measure:40;--mz-measure-w:calc(var(--mz-measure)*var(--folio-read-size)*1.02);--mz-pad-top:22px;--mz-pad-bottom:36px;--mz-pad-left:6px;--mz-pad-right:14px;--mz-plate-size:44px;--mz-avatar-gap:10px;--folio-wallpaper:none;--folio-meta:color-mix(in srgb,var(--SmartThemeBodyColor) 62%,transparent);--folio-hairline:var(--SmartThemeBorderColor);--folio-surface:color-mix(in srgb,var(--SmartThemeBodyColor) 4%,transparent);--st-entry-on:var(--SmartThemeUnderlineColor);--st-entry-constant:var(--SmartThemeQuoteColor);--st-entry-off:color-mix(in srgb,var(--SmartThemeBodyColor) 35%,transparent);--st-entry-off-style:dashed;--st-entry-off-bg:repeating-linear-gradient(-45deg,color-mix(in srgb,var(--SmartThemeBodyColor) 5%,transparent) 0 6px,transparent 6px 12px);--st-entry-bar:3px;--st-entry-radius:3px}
-body,.drawer-content,#left-nav-panel,#right-nav-panel,#extensions_settings,#extensions_settings2{color:var(--SmartThemeBodyColor)}
-#bg1{background-image:var(--folio-wallpaper);background-position:center;background-size:cover;background-repeat:no-repeat}
-#chat{--avatar-base-width:var(--mz-plate-size);--avatar-base-height:var(--mz-plate-size);color:var(--SmartThemeBodyColor);background:var(--SmartThemeChatTintColor);background-image:none}
-.drawer-content,#left-nav-panel,#right-nav-panel,#extensions_settings,#extensions_settings2,.popup,.popup_outer,#world_popup,#completion_prompt_manager{background-color:var(--SmartThemeBlurTintColor);border-color:var(--SmartThemeBorderColor)}
-#top-bar,#send_form,#send_textarea{background-color:transparent;border-color:var(--SmartThemeBorderColor)}
-#send_form{border:0;border-top:1px solid var(--SmartThemeBorderColor);border-radius:0}
-#send_textarea{background:transparent;border:0;border-bottom:1px solid transparent;border-radius:0;font-family:var(--mz-user-font,var(--folio-sans));font-size:calc(var(--mainFontSize)*1.02)}
-#send_textarea:focus{border-bottom-color:var(--SmartThemeUnderlineColor);outline:none}
-#send_textarea::placeholder,.timestamp,.mes_timer,.tokenCounterDisplay,.options-content a,.list-group-item{color:var(--folio-meta)}
-/* Preserve the reference theme's compact quick-reply row; otherwise wrapped buttons inflate the composer. */
-body #qr--bar{opacity:1;font-size:calc(var(--mainFontSize)*.82)}
-body #qr--bar>.qr--buttons{gap:4px;width:auto}
-body #qr--bar>.qr--buttons .qr--button,body #qr--bar>.qr--buttons .menu_button{font:inherit;min-height:0;height:auto;background-color:transparent;color:var(--folio-meta);border-color:var(--folio-hairline);border-radius:0;padding:1px 8px;margin:2px 0;line-height:1.5;white-space:nowrap}
-body #qr--bar>.qr--buttons .qr--button:hover,body #qr--bar>.qr--buttons .menu_button:hover{color:var(--SmartThemeUnderlineColor);border-color:var(--SmartThemeUnderlineColor)}
-#chat .mes{padding:var(--mz-pad-top) var(--mz-pad-right) var(--mz-pad-bottom) var(--mz-pad-left);border:0;border-bottom:1px solid transparent;border-radius:0;background:transparent;column-gap:4px;color:var(--SmartThemeBodyColor);box-shadow:none}
-body.folio-rules #chat .mes{border-bottom-color:var(--folio-hairline)}
-#chat .mes .mesAvatarWrapper{gap:2px;margin-right:var(--mz-avatar-gap)}
-#chat .mes .avatar img{border-radius:0}
-#chat .mes .mes_block{min-width:0}
-#chat .mes .ch_name{display:flex;align-items:baseline;gap:.65em;padding-bottom:7px;margin-bottom:10px;border-bottom:1px solid var(--folio-hairline)}
-#chat .mes .ch_name .name_text{color:var(--SmartThemeQuoteColor);font-family:var(--folio-sans);font-size:calc(var(--mainFontSize,16px)*.86);font-weight:600;letter-spacing:.1em}
-#chat .mes[is_user=true] .ch_name .name_text{color:var(--SmartThemeUnderlineColor)}
-#chat .mes .timestamp,#chat .mes .mes_timer,#chat .mes .tokenCounterDisplay{color:var(--folio-meta);font-family:var(--folio-sans);font-size:calc(var(--mainFontSize,16px)*.74);font-variant-numeric:tabular-nums;letter-spacing:.04em;opacity:1}
-#chat .mes_text{box-sizing:border-box;width:100%;max-width:var(--mz-measure-w);padding:2px 0;color:var(--SmartThemeBodyColor);font-family:var(--folio-serif);font-size:var(--folio-read-size);font-weight:400;line-height:var(--st-mes-line-height);letter-spacing:.02em;overflow-wrap:anywhere}
-#chat .mes[is_user=true] .mes_text{font-family:var(--mz-user-font,var(--folio-sans));font-size:calc(var(--folio-read-size)*.97);font-weight:500;letter-spacing:.03em}
-#chat .mes[is_user=false] .mes_text{font-family:var(--mz-char-font,var(--folio-serif))}
-#chat .mes[is_user=false] .mes_text p{text-align:justify;text-indent:0}
-#chat .mes_text p{margin-block:0 var(--st-mes-paragraph-gap)}
-#chat .mes_text p:last-child{margin-block-end:0}
-#chat .mes_text :is(blockquote,li) p{text-indent:0}
-#chat .mes_text em,#chat .mes_text i:not([class*=fa-]){color:var(--SmartThemeEmColor)}
-#chat .mes_text strong{font-weight:600}
-#chat .mes_text q{color:var(--SmartThemeQuoteColor)}
-#chat .mes_text u{text-decoration-color:var(--SmartThemeUnderlineColor);text-decoration-thickness:1px;text-underline-offset:.3em}
-#chat .mes_text a{color:var(--SmartThemeBodyColor);text-decoration:underline 1px var(--SmartThemeUnderlineColor);text-underline-offset:.25em}
-#chat .mes_text blockquote{margin:1em 0;padding:.25em .9em;border-left:2px solid var(--SmartThemeUnderlineColor);color:var(--SmartThemeEmColor);background:var(--folio-surface)}
-#chat .mes_text hr{width:68%;margin:1.8em auto;border:0;border-top:1px solid var(--folio-hairline)}
-body.folio-opening-page #chat .mes[mesid="0"]{padding-top:clamp(120px,22vh,220px)}
-body.folio-opening-page #chat .mes[mesid="0"] .mes_text:before{content:"OPENING";display:block;margin-bottom:1.8em;color:var(--folio-meta);font-family:var(--folio-sans);font-size:.68em;letter-spacing:.2em}
-body.folio-page-numbers #chat .mes:not(.smallSysMes):after{content:"— " attr(mesid) " —";position:absolute;right:var(--mz-pad-right);bottom:9px;left:calc(var(--mz-pad-left) + var(--mz-plate-size) + var(--mz-avatar-gap) + 4px);width:min(calc(100% - var(--mz-plate-size) - var(--mz-avatar-gap) - var(--mz-pad-left) - var(--mz-pad-right)),var(--mz-measure-w));color:var(--folio-meta);font-family:var(--folio-serif);font-size:calc(var(--mainFontSize,16px)*.78);text-align:center;letter-spacing:.12em;pointer-events:none}
-#world_popup_entries_list .world_entry,#completion_prompt_manager #completion_prompt_manager_list li.completion_prompt_manager_prompt{position:relative;padding-left:calc(.5em + 16px);border-radius:var(--st-entry-radius)}
-#completion_prompt_manager #completion_prompt_manager_list li.completion_prompt_manager_prompt::before{content:'';position:absolute;left:7px;top:calc(50% - var(--mz-dot,8px)/2);width:var(--mz-dot,8px);height:var(--mz-dot,8px);box-sizing:border-box;border-radius:50%;background:var(--SmartThemeUnderlineColor)}
-#completion_prompt_manager #completion_prompt_manager_list li.completion_prompt_manager_prompt.completion_prompt_manager_prompt_disabled::before{background:transparent;border:1px solid var(--folio-meta)}
-#world_popup_entries_list .world_entry{border-left:var(--st-entry-bar) solid var(--st-entry-on)}
-#world_popup_entries_list .world_entry.disabledWIEntry{opacity:1;filter:none;border-left-style:var(--st-entry-off-style);border-left-color:var(--st-entry-off);background-image:var(--st-entry-off-bg)}
-#world_popup_entries_list .world_entry.disabledWIEntry textarea[name=comment]{color:var(--folio-meta)}
-#completion_prompt_manager #completion_prompt_manager_list li.completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled){border-left:var(--st-entry-bar) solid var(--st-entry-on)}
-#completion_prompt_manager #completion_prompt_manager_list li.completion_prompt_manager_prompt.completion_prompt_manager_prompt_disabled{border:1px dashed var(--st-entry-off);border-left-width:var(--st-entry-bar);background-image:var(--st-entry-off-bg)}
-#completion_prompt_manager #completion_prompt_manager_list .completion_prompt_manager_prompt:not(.completion_prompt_manager_prompt_disabled) .prompt-manager-toggle-action{color:var(--st-entry-on);opacity:1}
-#completion_prompt_manager #completion_prompt_manager_list .completion_prompt_manager_prompt_disabled .prompt-manager-toggle-action{color:var(--SmartThemeBodyColor);opacity:.55}
-#completion_prompt_manager #completion_prompt_manager_list li.completion_prompt_manager_prompt span span span,#completion_prompt_manager .completion_prompt_manager_header_advanced span{filter:none;opacity:1;color:var(--folio-meta)}
-#rm_print_characters_block .entity_block{padding:10px 6px;border-bottom:1px solid var(--folio-hairline);border-radius:0;background:transparent}
-#rm_print_characters_block .entity_block:hover{background:var(--folio-surface)}
-#rm_print_characters_block .ch_name{font-family:var(--folio-serif);font-weight:600;letter-spacing:.04em}
-#rm_print_characters_block .ch_description,#rm_print_characters_block .ch_additional_info,#rm_print_characters_block .character_version{color:var(--folio-meta);font-family:var(--folio-sans)}
-#rm_print_characters_block .tag,.tags .tag,.rm_tag_filter .tag.actionable{border:1px solid var(--folio-hairline)!important;border-radius:0;background:transparent!important;color:var(--folio-meta)!important;opacity:1}
-.rm_tag_filter .tag.actionable.selected{border-color:var(--SmartThemeUnderlineColor)!important;color:var(--SmartThemeUnderlineColor)!important}
-.menu_button,input,select,textarea,.form-control{border-color:var(--folio-hairline)}
-/* Checkbox appearance is left to SillyTavern; only Folio's own settings controls are customized. */
-#folio-settings input[type=checkbox]{border-radius:0;border-color:var(--folio-meta);background-color:transparent;box-shadow:none}
-#folio-settings input[type=checkbox]:checked{border-color:var(--SmartThemeUnderlineColor);background-color:var(--SmartThemeUnderlineColor)}
-input[type=range],.neo-range-slider{height:2px;border-radius:0;box-shadow:none}
-input[type=range]::-webkit-slider-thumb{width:11px;height:11px;border:0;border-radius:0;background:var(--SmartThemeUnderlineColor)}
-.inline-drawer-icon{color:var(--folio-meta);filter:none}
-#toast-container>.toast{border:1px solid var(--folio-hairline);border-left:3px solid var(--folio-meta);border-radius:0;background:var(--SmartThemeBlurTintColor);color:var(--SmartThemeBodyColor);box-shadow:0 12px 32px var(--SmartThemeShadowColor)}
+/* Folio extension UI only. Global interface styling lives in the imported Folio UI theme. */
 .folio-settings{margin:10px 0;color:var(--SmartThemeBodyColor);font-size:.94em}
-.folio-settings>.inline-drawer>.inline-drawer-toggle{min-height:42px;padding:8px 10px;border:1px solid var(--folio-hairline);background:var(--SmartThemeBlurTintColor)}
-.folio-settings .inline-drawer-content{padding:10px 12px;border:1px solid var(--folio-hairline);border-top:0}
-.folio-intro{position:relative;padding:8px 2px 14px;border-bottom:1px solid var(--folio-hairline)}
-.folio-intro p{margin:6px 0 0;font-family:var(--folio-serif);font-size:1.05em}
+.folio-settings>.inline-drawer>.inline-drawer-toggle{min-height:42px;padding:8px 10px;border:1px solid var(--SmartThemeBorderColor);background:var(--SmartThemeBlurTintColor)}
+.folio-settings .inline-drawer-content{padding:10px 12px;border:1px solid var(--SmartThemeBorderColor);border-top:0}
+.folio-intro{position:relative;padding:8px 2px 14px;border-bottom:1px solid var(--SmartThemeBorderColor)}
+.folio-intro p{margin:6px 0 0;font-family:var(--mz-serif,serif);font-size:1.05em}
 .folio-kicker,.folio-version{color:var(--SmartThemeUnderlineColor);font-size:.68em;letter-spacing:.14em}
 .folio-version{position:absolute;top:8px;right:2px}
 .folio-subdrawer{margin-top:8px}
-.folio-subdrawer>.inline-drawer-toggle{padding:8px 2px;border-bottom:1px solid var(--folio-hairline)}
+.folio-subdrawer>.inline-drawer-toggle{padding:8px 2px;border-bottom:1px solid var(--SmartThemeBorderColor)}
 .folio-subdrawer>.inline-drawer-content{padding:10px 2px 12px;border:0}
 .folio-settings label{display:block;margin:9px 0 5px;font-size:.88em}
-.folio-settings input[type=text],.folio-settings input[type=url],.folio-settings select{width:100%;min-width:0;box-sizing:border-box}
+.folio-settings input[type=url],.folio-settings select{width:100%;min-width:0;box-sizing:border-box}
 .folio-range-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:11px}
 .folio-range-label label{margin:0 0 5px}
 .folio-range-label output{color:var(--SmartThemeUnderlineColor);font-variant-numeric:tabular-nums;font-size:.82em}
 .folio-settings input[type=range]{display:block;width:100%;margin:4px 0 12px}
 .folio-check{display:flex!important;align-items:center;gap:9px}
 .folio-check input{margin:0}
-.folio-hint{margin:8px 0 0;color:var(--folio-meta);font-size:.8em;line-height:1.55}
-.folio-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--folio-hairline)}
-.folio-footer span{color:var(--folio-meta);font-size:.78em}
-@media(max-width:1000px){:root{--mz-plate-size:34px;--mz-pad-top:18px;--mz-pad-bottom:32px;--mz-pad-left:4px;--mz-avatar-gap:4px;--mz-pad-right:18px}#chat .mes .ch_name{padding-bottom:6px;margin-bottom:8px}#chat .mes .ch_name .name_text{letter-spacing:.1em}body #qr--bar{flex-wrap:nowrap;justify-content:flex-start;scrollbar-width:none}body #qr--bar::-webkit-scrollbar{display:none}body #qr--bar>.qr--buttons{flex-wrap:nowrap;justify-content:flex-start;width:max-content;flex:none;padding:0 6px}.folio-settings>.inline-drawer>.inline-drawer-content{padding:9px}}
-@media(max-width:520px){#chat .mes{padding-right:12px}#chat .mes_text{font-size:calc(var(--folio-read-size)*.98)}}
+.folio-hint{margin:8px 0 0;color:var(--SmartThemeEmColor);font-size:.8em;line-height:1.55}
+.folio-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--SmartThemeBorderColor)}
+.folio-footer span{color:var(--SmartThemeEmColor);font-size:.78em}
