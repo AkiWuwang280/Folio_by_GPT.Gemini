@@ -50,31 +50,40 @@ body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono
 #qr--bar,#nonQRFormItems{border-top:0!important;border-bottom:0!important}
 #chat{border-bottom:0!important}
 
-/* ===== Icon system: one implementation, pseudo-elements only ===== */
-#top-settings-holder{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;padding:4px 3px!important;gap:2px!important}
-#top-settings-holder>.drawer{flex:0 0 50px!important;width:50px!important;min-width:50px!important;max-width:50px!important;margin:0!important;padding:0!important}
+/* ===== Icon system: nine equal navigation slots ===== */
+#top-settings-holder{
+ display:grid!important;grid-template-columns:repeat(9,minmax(0,1fr))!important;
+ align-items:center!important;gap:0!important;width:100%!important;min-width:0!important;
+ box-sizing:border-box!important;padding:3px 2px!important;overflow:visible!important
+}
+#top-settings-holder>.drawer{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ flex:initial!important;width:auto!important;min-width:0!important;max-width:none!important;
+ margin:0!important;padding:0!important
+}
+#top-settings-holder .drawer-icon{
+ position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;width:100%!important;min-width:0!important;max-width:48px!important;
+ height:42px!important;min-height:42px!important;padding:0!important;
+ font-size:0!important;border-radius:0!important;background-image:none!important
+}
 #top-settings-holder .drawer-icon.openIcon{box-shadow:inset 0 -3px 0 -1px var(--SmartThemeUnderlineColor)!important}
-#top-settings-holder .drawer-icon,
-#options_button,
-#extensionsMenuButton,
-#send_but,
-#top-settings-holder .drawer-icon,#options_button,#extensionsMenuButton,#send_but{position:relative!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;border-radius:0!important;background-image:none!important;width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important}
-#mes_stop{position:relative!important;font-size:0!important;border-radius:0!important;background-image:none!important;width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important;flex:0 0 50px!important}
+#options_button,#extensionsMenuButton,#send_but{
+ position:relative!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ font-size:0!important;border-radius:0!important;background-image:none!important
+}
+#mes_stop{position:relative!important;font-size:0!important;border-radius:0!important;background-image:none!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;flex:0 0 44px!important}
 #send_form{min-width:0!important}
-
 #top-settings-holder .drawer-icon::before,
-#options_button::before,
-#extensionsMenuButton::before,
-#send_but::before,
-#mes_stop::before{content:""!important;display:block!important;flex:0 0 40px!important;width:40px!important;height:40px!important;background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;transition:filter .2s ease,opacity .2s ease}
-#top-settings-holder .drawer-icon:hover,
-#options_button:hover,#extensionsMenuButton:hover,#send_but:hover,#mes_stop:hover{border-color:var(--SmartThemeUnderlineColor)!important}
-body.folio-light #top-settings-holder .drawer-icon::before,
-body.folio-light #options_button::before,
-body.folio-light #extensionsMenuButton::before,
-body.folio-light #send_but::before,
-body.folio-light #mes_stop::before{filter:invert(.88) hue-rotate(180deg) contrast(1.12);}
-
+#options_button::before,#extensionsMenuButton::before,#send_but::before,#mes_stop::before{
+ content:""!important;display:block!important;flex:0 1 34px!important;width:34px!important;height:34px!important;
+ max-width:calc(100% - 4px)!important;max-height:34px!important;background-position:center!important;
+ background-repeat:no-repeat!important;background-size:contain!important;transition:filter .2s ease,opacity .2s ease
+}
+#top-settings-holder .drawer-icon:hover,#options_button:hover,#extensionsMenuButton:hover,#send_but:hover,#mes_stop:hover{border-color:var(--SmartThemeUnderlineColor)!important}
+body.folio-light #top-settings-holder .drawer-icon::before,body.folio-light #options_button::before,
+body.folio-light #extensionsMenuButton::before,body.folio-light #send_but::before,body.folio-light #mes_stop::before{filter:invert(.88) hue-rotate(180deg) contrast(1.12)}
 #top-settings-holder>.drawer:nth-child(1) .drawer-icon::before{background-image:url("icons/01_top_ai_config.png")!important}
 #top-settings-holder>.drawer:nth-child(2) .drawer-icon::before{background-image:url("icons/02_top_api_connections.png")!important}
 #top-settings-holder>.drawer:nth-child(3) .drawer-icon::before{background-image:url("icons/03_top_formatting_ui.png")!important}
@@ -90,12 +99,18 @@ body.folio-light #mes_stop::before{filter:invert(.88) hue-rotate(180deg) contras
 #send_but::before{background-image:url("icons/12_bottom_send_letter.png")!important}
 #mes_stop::before{background-image:url("icons/13_bottom_stop_seal.png")!important}
 
-/* ===== MEMENTO watermark: independent SVG layer ===== */
-#folio-watermark-layer{position:fixed;right:-32px;bottom:-32px;width:min(82vw,560px);height:min(82vw,560px);pointer-events:none;z-index:0;color:var(--SmartThemeBodyColor);transition:opacity .2s ease}
+/* ===== MEMENTO watermark: inside the reading canvas, above its background ===== */
+#chat{position:relative!important}
+#folio-watermark-layer{
+ position:absolute;left:0;top:0;width:100%;height:100%;min-height:100%;
+ overflow:visible;pointer-events:none;z-index:0;color:var(--SmartThemeBodyColor);
+ opacity:1;contain:paint
+}
 #folio-watermark-layer[hidden]{display:none!important}
-#folio-watermark-layer svg{display:block;width:100%;height:100%;overflow:visible}
-#folio-watermark-layer circle,#folio-watermark-layer path{fill:none;stroke:currentColor;stroke-opacity:.19;stroke-linecap:round;stroke-linejoin:round}
-#folio-watermark-layer circle[fill="currentColor"]{fill:currentColor;stroke:none;opacity:.2}
+#folio-watermark-layer svg{position:absolute;right:-24px;bottom:8px;width:min(82vw,560px);height:min(82vw,560px);display:block;overflow:visible}
+#folio-watermark-layer circle,#folio-watermark-layer path{fill:none;stroke:currentColor;stroke-opacity:.27;stroke-linecap:round;stroke-linejoin:round}
+#folio-watermark-layer circle[fill="currentColor"]{fill:currentColor;stroke:none;opacity:.3}
+#chat>.mes{position:relative;z-index:1}
 
 /* Narrow screens: keep all nine navigation entries reachable without shrinking desktop controls. */
 @media screen and (max-width:1000px){#top-settings-holder .drawer-icon,#options_button,#extensionsMenuButton,#send_but{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important}#top-settings-holder .drawer-icon::before,#options_button::before,#extensionsMenuButton::before,#send_but::before,#mes_stop::before{flex-basis:36px!important;width:36px!important;height:36px!important}#mes_stop{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;flex-basis:44px!important}}
