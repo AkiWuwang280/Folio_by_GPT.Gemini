@@ -39,38 +39,73 @@ body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono
 .character_select.is_fav,.group_select.is_fav{border-left:2px solid var(--SmartThemeUnderlineColor)!important}
 /* 3. 中间输入框：占满剩余宽度 + 上下细线与四角小直角 */
 #send_textarea{flex:1 1 auto!important;min-width:100px!important;min-height:2.4em!important;max-height:6em!important;padding:6px 10px!important;border:0!important;border-top:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor))!important;border-bottom:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor))!important;border-radius:0!important;background:linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/8px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/1px 8px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/8px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/1px 8px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/8px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/1px 8px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/8px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/1px 8px no-repeat,color-mix(in srgb,var(--SmartThemeBodyColor) 2.5%,transparent)!important;box-shadow:none!important}
-/* ===== 1. 挂载 icons/ 独立版画图标（不改 DOM） ===== */
-#top-settings-holder .drawer-icon::before,
-#options_button::before,
-#extensionsMenuButton::before,
-#send_but::before,
-#mes_stop::before { content: "" !important; }
-
+/* ===== 挂载 icons/ 版画图标（放大尺寸 + 浅色自动转深墨） ===== */
+#top-settings-holder { padding: 4px 3px !important; gap: 2px !important; }
 #top-settings-holder .drawer-icon,
 #options_button,
 #extensionsMenuButton,
 #send_but,
 #mes_stop {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
   font-size: 0 !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-size: 76% 76% !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+}
+#top-settings-holder .drawer-icon {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+}
+#options_button,
+#extensionsMenuButton,
+#send_but,
+#mes_stop {
+  width: 36px !important;
+  height: 36px !important;
 }
 
-#top-settings-holder > .drawer:nth-child(1) .drawer-icon { background-image: url("icons/01_top_ai_config.png") !important; }
-#top-settings-holder > .drawer:nth-child(2) .drawer-icon { background-image: url("icons/02_top_api_connections.png") !important; }
-#top-settings-holder > .drawer:nth-child(3) .drawer-icon { background-image: url("icons/03_top_formatting_ui.png") !important; }
-#top-settings-holder > .drawer:nth-child(4) .drawer-icon { background-image: url("icons/04_top_world_info.png") !important; }
-#top-settings-holder > .drawer:nth-child(5) .drawer-icon { background-image: url("icons/05_top_user_settings.png") !important; }
-#top-settings-holder > .drawer:nth-child(6) .drawer-icon { background-image: url("icons/06_top_backgrounds.png") !important; }
-#top-settings-holder > .drawer:nth-child(7) .drawer-icon { background-image: url("icons/07_top_extensions.png") !important; }
-#top-settings-holder > .drawer:nth-child(8) .drawer-icon { background-image: url("icons/08_top_persona_memento.png") !important; }
-#top-settings-holder > .drawer:nth-child(9) .drawer-icon { background-image: url("icons/09_top_characters.png") !important; }
+#top-settings-holder .drawer-icon::before,
+#options_button::before,
+#extensionsMenuButton::before,
+#send_but::before,
+#mes_stop::before {
+  content: "" !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 88% 88% !important;
+  transition: filter .2s ease;
+}
 
-#options_button { background-image: url("icons/10_bottom_options_menu.png") !important; }
-#extensionsMenuButton { background-image: url("icons/11_bottom_extensions_quill.png") !important; }
-#send_but { background-image: url("icons/12_bottom_send_letter.png") !important; }
-#mes_stop { background-image: url("icons/13_bottom_stop_seal.png") !important; }
+/* 浅色主题：暖白线稿自动转为深墨线稿，保留暖橘点缀 */
+body.folio-light #top-settings-holder .drawer-icon::before,
+body.folio-light #options_button::before,
+body.folio-light #extensionsMenuButton::before,
+body.folio-light #send_but::before,
+body.folio-light #mes_stop::before {
+  filter: invert(0.88) hue-rotate(180deg) contrast(1.15);
+}
+
+#top-settings-holder > .drawer:nth-child(1) .drawer-icon::before { background-image: url("icons/01_top_ai_config.png") !important; }
+#top-settings-holder > .drawer:nth-child(2) .drawer-icon::before { background-image: url("icons/02_top_api_connections.png") !important; }
+#top-settings-holder > .drawer:nth-child(3) .drawer-icon::before { background-image: url("icons/03_top_formatting_ui.png") !important; }
+#top-settings-holder > .drawer:nth-child(4) .drawer-icon::before { background-image: url("icons/04_top_world_info.png") !important; }
+#top-settings-holder > .drawer:nth-child(5) .drawer-icon::before { background-image: url("icons/05_top_user_settings.png") !important; }
+#top-settings-holder > .drawer:nth-child(6) .drawer-icon::before { background-image: url("icons/06_top_backgrounds.png") !important; }
+#top-settings-holder > .drawer:nth-child(7) .drawer-icon::before { background-image: url("icons/07_top_extensions.png") !important; }
+#top-settings-holder > .drawer:nth-child(8) .drawer-icon::before { background-image: url("icons/08_top_persona_memento.png") !important; }
+#top-settings-holder > .drawer:nth-child(9) .drawer-icon::before { background-image: url("icons/09_top_characters.png") !important; }
+
+#options_button::before { background-image: url("icons/10_bottom_options_menu.png") !important; }
+#extensionsMenuButton::before { background-image: url("icons/11_bottom_extensions_quill.png") !important; }
+#send_but::before { background-image: url("icons/12_bottom_send_letter.png") !important; }
+#mes_stop::before { background-image: url("icons/13_bottom_stop_seal.png") !important; }
 
 /* ===== 2. MEMENTO 几何暗纹（自动适配五套主题，不干扰正文） ===== */
 body.folio-watermark::after {
@@ -151,3 +186,14 @@ body.folio-watermark::after {
   font-weight: inherit !important;
   margin-right: 0 !important;
 }
+/* 消除输入框上方多余的浅色横条 */
+#chat { border-bottom: 0 !important; }
+#form_sheld, #qr--bar, #nonQRFormItems {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#form_sheld { border-top: 1px solid var(--folio-reading-line, var(--SmartThemeBorderColor)) !important; }
+#qr--bar, #nonQRFormItems { border-top: 0 !important; border-bottom: 0 !important; }
+
+/* 让 MEMENTO 几何暗纹透出来（依然不挡点击和滚动） */
+body.folio-watermark::after { z-index: 2 !important; }
