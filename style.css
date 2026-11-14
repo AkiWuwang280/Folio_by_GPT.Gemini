@@ -113,4 +113,12 @@ body.folio-light #extensionsMenuButton::before,body.folio-light #send_but::befor
 #chat>.mes{position:relative;z-index:1}
 
 /* Narrow screens: keep all nine navigation entries reachable without shrinking desktop controls. */
-@media screen and (max-width:1000px){#top-settings-holder .drawer-icon,#options_button,#extensionsMenuButton,#send_but{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important}#top-settings-holder .drawer-icon::before,#options_button::before,#extensionsMenuButton::before,#send_but::before,#mes_stop::before{flex-basis:36px!important;width:36px!important;height:36px!important}#mes_stop{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;flex-basis:44px!important}}
+@media screen and (max-width:1000px){
+ #top-settings-holder{grid-template-columns:repeat(9,minmax(0,1fr))!important}
+ #top-settings-holder>.drawer{min-width:0!important;width:auto!important}
+ #top-settings-holder .drawer-icon{width:100%!important;min-width:0!important;height:38px!important;min-height:38px!important}
+ #top-settings-holder .drawer-icon::before{flex-basis:30px!important;width:30px!important;height:30px!important;max-width:calc(100% - 4px)!important;max-height:30px!important}
+ #options_button,#extensionsMenuButton,#send_but{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important}
+ #options_button::before,#extensionsMenuButton::before,#send_but::before,#mes_stop::before{flex-basis:32px!important;width:32px!important;height:32px!important}
+ #mes_stop{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;flex-basis:40px!important}
+}
