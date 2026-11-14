@@ -32,3 +32,11 @@ body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono
 #send_form{background:var(--SmartThemeBlurTintColor)!important;border-top:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor))!important;box-shadow:none!important}
 #send_form .interactable,#send_form .fa-solid,#send_form .fa-regular{color:var(--SmartThemeEmColor);transition:color .2s}
 #send_form .interactable:hover{color:var(--SmartThemeUnderlineColor)}
+/* 修复手机端角色名被裁切与时间戳下方多余横线 */
+#chat .mes .ch_name{align-items:flex-start!important;margin-bottom:10px!important;overflow:visible!important}
+#chat .mes .ch_name > .flex-container.flex1{flex-wrap:wrap;row-gap:4px;overflow:visible!important}
+#chat .mes .ch_name .name_text{line-height:1.35!important}
+@media screen and (max-width:1000px){
+  #chat .mes .ch_name > .flex-container.flex1::after{display:none!important}
+  #chat .mes .timestamp{flex-basis:100%;margin-left:0!important;line-height:1.3}
+}
