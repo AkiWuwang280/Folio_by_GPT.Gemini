@@ -128,6 +128,17 @@ function ensureBackgroundLayer() {
     return layer;
 }
 
+function ensureTextureLayer() {
+    let layer = document.getElementById('paper-theme-texture-layer');
+    if (!layer) {
+        layer = document.createElement('div');
+        layer.id = 'paper-theme-texture-layer';
+        layer.setAttribute('aria-hidden', 'true');
+        document.body.append(layer);
+    }
+    return layer;
+}
+
 function applySettings() {
     const s = getSettings();
     const root = document.documentElement;
