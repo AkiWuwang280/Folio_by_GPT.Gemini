@@ -127,6 +127,7 @@
         const overlay = `rgba(${shade}, ${clamp(settings.backgroundOpacity, 0, 0.9)})`;
         root.style.setProperty('--folio-background', image ? `linear-gradient(${overlay}, ${overlay}), url("${image.replace(/["\\\\]/g, '')}")` : 'none');
         document.body.classList.toggle('folio-enabled', true);
+        document.body.classList.toggle('folio-has-background', Boolean(image));
         document.body.classList.toggle('folio-no-borders', !settings.borders);
         document.body.classList.toggle('folio-page-number', !!settings.pageNumber);
         document.body.classList.toggle('folio-quote-style', !!settings.quoteStyle);
