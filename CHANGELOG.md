@@ -13,3 +13,10 @@
 - 设置面板改为原生可折叠抽屉，分组也可折叠。
 - 增加四套配色、独立背景图、字体与排版设置。
 - 新增可导入的原生 UI 主题 JSON。
+
+## 1.2.0
+- Rebased the imported UI theme on the supplied original「纸上访谈」theme CSS, preserving its established layout, component styling, and mobile measurements.
+- Separated extension settings CSS from global UI styling to reduce unintended selector collisions.
+- Replaced ineffective free-text font-name fields with built-in font-stack selectors.
+- Restored original theme typography and layout variables as the source of truth; exposed only supported, wired controls.
+- Updated the settings panel version label and runtime version marker to 1.2.0.
