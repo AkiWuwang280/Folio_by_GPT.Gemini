@@ -15,15 +15,17 @@
 
 ## 安装
 
-在 SillyTavern 的扩展安装界面中，使用本仓库地址安装：
+**请下载 Folio 分支压缩包，不要直接下载仓库默认分支（main）。**
 
-`https://github.com/AkiWuwang280/PaperTheme_by_gpt`
+[下载页序 · Folio（folio-rebuild 分支 ZIP）](https://github.com/AkiWuwang280/PaperTheme_by_gpt/archive/refs/heads/folio-rebuild.zip)
 
-如果通过 Git 安装，请选择 `folio-rebuild` 分支。扩展文件应位于：
+解压后，将文件夹重命名为 `PaperTheme_by_gpt`，放入：
 
 `public/scripts/extensions/third-party/PaperTheme_by_gpt/`
 
-安装后刷新页面，在「扩展」设置中找到「页序 · Folio」。
+确认 `manifest.json`、`index.js`、`style.css` 和 `settings.html` 直接位于该文件夹内，不要多套一层同名目录。刷新酒馆页面，在「扩展」设置中找到「页序 · Folio」。
+
+仓库的 `main` 分支仍保留旧版；本次新版只在 `folio-rebuild` 分支。
 
 ## 使用说明
 
