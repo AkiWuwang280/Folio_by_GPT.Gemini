@@ -2,7 +2,7 @@
 (() => {
 'use strict';
 const KEY='folio_theme', TEMPLATE='third-party/PaperTheme_by_gpt';
-const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true};
+const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:truewatermark:true,watermarkOpacity:.08};
 const PALETTES={
 'ink-night':{body:'#E0DCD4',em:'#9C978F',accent:'#E87046',quote:'#F6F3ED',panel:'rgba(27,26,24,.97)',chat:'rgba(20,19,18,.96)',shadow:'rgba(0,0,0,.45)',border:'rgba(224,220,212,.14)',tick:'#141312'},
 'warm-paper':{body:'#231F20',em:'#57524B',accent:'#7A5C2C',quote:'#0E0C0D',panel:'#F3F0E9',chat:'#FAF8F3',shadow:'rgba(40,30,20,.16)',border:'rgba(35,31,32,.34)',tick:'#FAF8F3'},
@@ -33,7 +33,8 @@ function apply(){
  setVar(root,'--folio-wallpaper',image?`linear-gradient(rgba(${tint},${alpha}),rgba(${tint},${alpha})),url("${image.replace(/["\\]/g,'')}")`:'none');
  document.body.classList.toggle('no-mesIDDisplay',!s.pageNumbers);
  document.body.classList.toggle('folio-opening-page',!!s.openingPage);
- document.body.classList.toggle('folio-rules',!!s.rules);
+ document.body.classList.toggle('folio-rules',!!s.rules);document.body.classList.toggle('folio-watermark',!!s.watermark);
+setVar(root,'--folio-watermark-opacity',clamp(s.watermarkOpacity,0,.25));
 }
 function save(){apply();ctx.saveSettingsDebounced?.();}
 function syncPanel(panel){
@@ -41,7 +42,7 @@ function syncPanel(panel){
  panel.find('[data-folio-output]').each(function(){this.textContent=s[this.dataset.folioOutput];});
 }
 async function render(){const $=window.jQuery,host=$?.('#extensions_settings2');if(!$||!host?.length||$('#folio-settings').length)return;try{host.append(await ctx.renderExtensionTemplateAsync(TEMPLATE,'settings'));syncPanel($('#folio-settings'));}catch(e){console.error('[Folio] settings render failed',e);}}
-function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(document).on('input.folio change.folio','#folio-settings [data-folio-setting]',function(){const k=this.dataset.folioSetting;if(!(k in DEFAULTS))return;let v=this.type==='checkbox'?this.checked:this.value;if(k==='fontScale')v=clamp(v,.8,1.4);if(k==='lineHeight')v=clamp(v,1.4,2.4);if(k==='measure')v=clamp(v,28,60);if(k==='paragraphGap')v=clamp(v,0,1.6);if(k==='backgroundOpacity')v=clamp(v,0,.85);s[k]=v;const o=$('#folio-settings').find('[data-folio-output="'+k+'"]');if(o.length)o.text(v);save();});$(document).on('click.folio','#folio-reset',function(){Object.assign(s,structuredClone(DEFAULTS));syncPanel($('#folio-settings'));save();});}
+function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(document).on('input.folio change.folio','#folio-settings [data-folio-setting]',function(){const k=this.dataset.folioSetting;if(!(k in DEFAULTS))return;let v=this.type==='checkbox'?this.checked:this.value;if(k==='fontScale')v=clamp(v,.8,1.4);if(k==='lineHeight')v=clamp(v,1.4,2.4);if(k==='measure')v=clamp(v,28,60);if(k==='paragraphGap')v=clamp(v,0,1.6);if(k==='backgroundOpacity')v=clamp(v,0,.85);s[k]=v;const o=$('#folio-settings').find('[data-folio-output="'+k+'"]');if(o.length)o.text(v);save();});$(document).on('click.folio','#folio-reset',function(){Object.assign(s,structuredClone(DEFAULTS));syncPanel($('#folio-settings'));save();});if(k==='watermarkOpacity')v=clamp(v,0,.25);}
 apply();bind();render();
 const mo=new MutationObserver(()=>{if(!document.getElementById('folio-settings'))render();});
 const host=document.getElementById('extensions_settings2');if(host)mo.observe(host,{childList:true});
