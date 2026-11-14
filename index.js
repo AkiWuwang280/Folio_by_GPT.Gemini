@@ -1,4 +1,4 @@
-/* Folio 1.1.0 — independent SillyTavern theme controls */
+/* Folio 1.1.1 — independent SillyTavern theme controls */
 (() => {
 'use strict';
 const KEY='folio_theme', TEMPLATE='third-party/PaperTheme_by_gpt';
