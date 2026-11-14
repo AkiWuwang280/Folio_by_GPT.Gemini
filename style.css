@@ -1,0 +1,181 @@
+/* Paper Theme — scoped styles, designed to coexist with the host theme. */
+:root.paper-theme-enabled {
+    --paper-page: #17151e;
+    --paper-surface: #211e2a;
+    --paper-raised: #292535;
+    --paper-text: #e9e3f0;
+    --paper-muted: #aaa1b5;
+    --paper-line: #454052;
+    --paper-accent: #c2a5e8;
+    --paper-ai: #e9e3f0;
+    --paper-user: #e8dff5;
+    --paper-font-size: 16px;
+    --paper-line-height: 1.68;
+    --paper-content-width: 900px;
+    --paper-ai-font: inherit;
+    --paper-user-font: inherit;
+    --paper-texture-opacity: 0.025;
+}
+
+#paper-theme-background-layer {
+    position: fixed;
+    inset: -22px;
+    z-index: 0;
+    pointer-events: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translateZ(0);
+    will-change: opacity, filter;
+}
+
+body > *:not(#paper-theme-background-layer) {
+    position: relative;
+    z-index: 1;
+}
+
+:root.paper-theme-enabled #chat .mes {
+    border: 1px solid var(--paper-line);
+    border-radius: 10px;
+    background-color: color-mix(in srgb, var(--paper-surface) 82%, transparent);
+}
+
+:root.paper-theme-enabled #chat .mes .mes_text {
+    max-width: min(100%, var(--paper-content-width));
+    font-size: var(--paper-font-size);
+    line-height: var(--paper-line-height);
+    color: var(--paper-text);
+}
+
+:root.paper-theme-enabled #chat .mes:not([is_user="true"]) .mes_text {
+    font-family: var(--paper-ai-font);
+    color: var(--paper-ai);
+}
+
+:root.paper-theme-enabled #chat .mes[is_user="true"] .mes_text {
+    font-family: var(--paper-user-font);
+    color: var(--paper-user);
+}
+
+:root.paper-theme-enabled #chat .mes .name_text {
+    color: var(--paper-accent);
+}
+
+:root.paper-theme-enabled #chat .mes .mes_text a {
+    color: var(--paper-accent);
+}
+
+:root.paper-theme-enabled #chat .mes .mes_text blockquote {
+    border-left: 2px solid var(--paper-accent);
+    color: var(--paper-muted);
+}
+
+:root.paper-theme-enabled.paper-theme-no-borders #chat .mes {
+    border-color: transparent;
+}
+
+:root.paper-theme-enabled #paper-theme-settings {
+    color: var(--paper-text);
+}
+
+.paper-settings {
+    --paper-settings-gap: 12px;
+    margin: 8px 0;
+    color: var(--SmartThemeBodyColor, inherit);
+}
+
+.paper-settings-intro {
+    margin: 4px 0 14px;
+    color: var(--SmartThemeEmColor, inherit);
+    font-size: 0.92em;
+    line-height: 1.5;
+}
+
+.paper-settings-group {
+    margin: 12px 0;
+    padding: 12px;
+    border: 1px solid var(--SmartThemeBorderColor, rgba(127,127,127,.35));
+    border-radius: 10px;
+    background: var(--SmartThemeBlurTintColor, rgba(127,127,127,.04));
+}
+
+.paper-settings-group h4 {
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--SmartThemeBorderColor, rgba(127,127,127,.3));
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.paper-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 10px 0;
+    min-width: 0;
+}
+
+.paper-field > span,
+.paper-check > span {
+    font-size: 0.92em;
+}
+
+.paper-field output {
+    color: var(--SmartThemeEmColor, inherit);
+    font-variant-numeric: tabular-nums;
+}
+
+.paper-field input,
+.paper-field select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+
+.paper-field input[type="range"] {
+    accent-color: var(--paper-accent, var(--SmartThemeQuoteColor));
+}
+
+.paper-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+}
+
+.paper-check input {
+    flex: 0 0 auto;
+}
+
+.paper-hint,
+.paper-settings-footer small {
+    display: block;
+    margin: 8px 0 0;
+    color: var(--SmartThemeEmColor, inherit);
+    font-size: 0.82em;
+    line-height: 1.45;
+    opacity: 0.82;
+}
+
+.paper-settings-footer {
+    display: grid;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+@media (max-width: 600px) {
+    .paper-settings-group {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .paper-field {
+        gap: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #paper-theme-background-layer {
+        transition: opacity .18s ease, filter .18s ease;
+    }
+}
