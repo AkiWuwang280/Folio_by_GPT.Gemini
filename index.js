@@ -1,4 +1,4 @@
-/* Folio 1.3.5 — visible watermark, restored navigation states and corrected controls */
+/* Folio 1.3.7 — dedicated SVG watermark layer */
 (() => {
 'use strict';
 const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
@@ -14,6 +14,26 @@ const ctx=window.SillyTavern?.getContext?.();if(!ctx){console.warn('[Folio] ST c
 const all=ctx.extensionSettings??(ctx.extensionSettings={});all[KEY]??=structuredClone(DEFAULTS);const s=all[KEY];for(const[k,v]of Object.entries(DEFAULTS))if(s[k]===undefined)s[k]=v;if(s.watermarkOpacity===.08||s.watermarkOpacity===.16)s.watermarkOpacity=.6;
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Number(v)||a));
 function setVar(root,key,value,important=false){root.style.setProperty(key,value,important?'important':'');}
+
+const WATERMARK_ID='folio-watermark-layer';
+function ensureWatermarkLayer(){
+ let layer=document.getElementById(WATERMARK_ID);
+ if(layer)return layer;
+ layer=document.createElement('div');layer.id=WATERMARK_ID;layer.setAttribute('aria-hidden','true');
+ const ns='http://www.w3.org/2000/svg';
+ const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 420 420');svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+ const add=(tag,attrs)=>{const el=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,String(v)));svg.appendChild(el);};
+ add('circle',{cx:286,cy:286,r:168,'stroke-dasharray':'180 34 62 24','stroke-width':2.2});
+ add('circle',{cx:286,cy:286,r:124,'stroke-dasharray':'96 28 140 42','stroke-width':1.8});
+ add('circle',{cx:286,cy:286,r:78,'stroke-dasharray':'48 18','stroke-width':1.6});
+ add('path',{d:'M92 286 H408 M286 84 V408','stroke-width':1.35,'stroke-dasharray':'3 7'});
+ add('path',{d:'M230 326 V248 L286 294 L342 248 V326','stroke-width':2.2});
+ add('path',{d:'M286 210 L294 218 L286 226 L278 218 Z M138 352 L148 362 L138 372 L128 362 Z','stroke-width':1.8});
+ add('circle',{cx:138,cy:362,r:22,'stroke-dasharray':'18 10','stroke-width':1.6});
+ add('circle',{cx:230,cy:248,r:3,fill:'currentColor',stroke:'none'});
+ add('circle',{cx:342,cy:248,r:3,fill:'currentColor',stroke:'none'});
+ layer.appendChild(svg);document.body.appendChild(layer);return layer;
+}
 function apply(){
  const root=document.documentElement,p=PALETTES[s.palette]||PALETTES['ink-night'];
  const vars={'--SmartThemeBodyColor':p.body,'--SmartThemeEmColor':p.em,'--SmartThemeUnderlineColor':p.accent,'--SmartThemeQuoteColor':p.quote,'--SmartThemeBlurTintColor':p.panel,'--SmartThemeChatTintColor':p.chat,'--SmartThemeShadowColor':p.shadow,'--SmartThemeBorderColor':p.border,'--SmartThemeCheckboxTickColor':p.tick};
@@ -33,8 +53,10 @@ function apply(){
  setVar(root,'--folio-wallpaper',image?`linear-gradient(rgba(${tint},${alpha}),rgba(${tint},${alpha})),url("${image.replace(/["\\\\]/g,'')}")`:'none');
  document.body.classList.toggle('no-mesIDDisplay',!s.pageNumbers);
  document.body.classList.toggle('folio-opening-page',!!s.openingPage);
- document.body.classList.toggle('folio-rules',!!s.rules);document.body.classList.toggle('folio-watermark',!!s.watermark);
-setVar(root,'--folio-watermark-opacity',clamp(s.watermarkOpacity,0,1));
+ document.body.classList.toggle('folio-rules',!!s.rules);
+ const watermark=ensureWatermarkLayer();watermark.hidden=!s.watermark;
+ watermark.style.opacity=String(clamp(s.watermarkOpacity,0,1));
+ setVar(root,'--folio-watermark-opacity',clamp(s.watermarkOpacity,0,1));
 }
 function save(){apply();ctx.saveSettingsDebounced?.();}
 function syncPanel(panel){
@@ -46,6 +68,6 @@ function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(d
 apply();bind();render();
 const mo=new MutationObserver(()=>{if(!document.getElementById('folio-settings'))render();});
 const host=document.getElementById('extensions_settings2');if(host)mo.observe(host,{childList:true});
-window.FolioTheme={apply,getSettings:()=>({...s}),reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.3.5 loaded');
+window.FolioTheme={apply,getSettings:()=>({...s}),getWatermarkStatus:()=>{const el=document.getElementById(WATERMARK_ID);return {exists:!!el,visible:!!el&&!el.hidden,opacity:el?.style.opacity??null,svg:!!el?.querySelector('svg')};},reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
+console.info('[Folio] 1.3.7 loaded');
 })();
