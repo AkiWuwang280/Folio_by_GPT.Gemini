@@ -29,6 +29,16 @@
     will-change: opacity, filter;
 }
 
+#paper-theme-background-layer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,.7) .55px, transparent .7px);
+    background-size: 5px 5px;
+    opacity: var(--paper-texture-opacity, 0);
+}
+
 body > *:not(#paper-theme-background-layer) {
     position: relative;
     z-index: 1;
@@ -37,6 +47,7 @@ body > *:not(#paper-theme-background-layer) {
 :root.paper-theme-enabled #chat .mes {
     border: 1px solid var(--paper-line);
     border-radius: 10px;
+    background-color: var(--paper-surface);
     background-color: color-mix(in srgb, var(--paper-surface) 82%, transparent);
 }
 
