@@ -48,8 +48,10 @@ body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono
 #form_sheld::before,#send_form::before{display:none!important}
 #qr--bar,#nonQRFormItems{background-color:transparent!important;box-shadow:none!important;border-top:0!important;border-bottom:0!important}
 #chat{border-bottom:0!important;margin-bottom:0!important;padding-bottom:0!important}
-#form_sheld{margin-top:0!important;padding-top:4px!important;border-top:0!important;background:var(--SmartThemeChatTintColor)!important}
+#form_sheld{margin-top:0!important;padding-top:2px!important;border-top:0!important;background:var(--SmartThemeChatTintColor)!important}
 #sheld>hr,#drag_bar{border:0!important;background:var(--SmartThemeChatTintColor)!important}
+#sheld{gap:0!important;background:var(--SmartThemeChatTintColor)!important}
+#sheld>hr,#form_sheld>hr,#sheld>.ui-resizable-handle,#form_sheld>.ui-resizable-handle,#nonQRFormItems:empty{display:none!important}
 
 /* ===== Icon system: nine equal navigation slots ===== */
 #top-settings-holder{
