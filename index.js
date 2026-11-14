@@ -1,6 +1,8 @@
-/* Folio 1.3.9 — dedicated SVG watermark layer */
+/* Folio 1.4.0 — persistent watermark, guarded settings render, refined navigation */
 (() => {
 'use strict';
+if (window.__folioInstanceLoaded) { console.info('[Folio] duplicate script load ignored'); return; }
+window.__folioInstanceLoaded = true;
 const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
 const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.6};
 const PALETTES={
@@ -36,7 +38,13 @@ function ensureWatermarkLayer(){
  }
  const host=document.getElementById('chat')||document.body;
  if(layer.parentElement!==host)host.prepend(layer);
+ positionWatermarkLayer(layer);
  return layer;
+}
+function positionWatermarkLayer(layer){
+ const chat=document.getElementById('chat');if(!chat||!layer)return;
+ const r=chat.getBoundingClientRect();
+ Object.assign(layer.style,{position:'fixed',left:`${r.left}px`,top:`${r.top}px`,width:`${r.width}px`,height:`${r.height}px`});
 }
 function apply(){
  const root=document.documentElement,p=PALETTES[s.palette]||PALETTES['ink-night'];
@@ -68,15 +76,33 @@ function syncPanel(panel){
  panel.find('[data-folio-setting]').each(function(){const k=this.dataset.folioSetting;if(!(k in s))return;if(this.type==='checkbox')this.checked=!!s[k];else this.value=s[k]??'';});
  panel.find('[data-folio-output]').each(function(){const k=this.dataset.folioOutput;this.textContent=k==='watermarkOpacity'?`${Math.round(Number(s[k])*100)}%`:s[k];});
 }
-async function render(){const $=window.jQuery,host=$?.('#extensions_settings2');if(!$||!host?.length||$('#folio-settings').length)return;try{host.append(await ctx.renderExtensionTemplateAsync(TEMPLATE,'settings'));syncPanel($('#folio-settings'));}catch(e){console.error('[Folio] settings render failed',e);}}
+let renderingSettings=false;
+async function render(){
+ const $=window.jQuery,host=$?.('#extensions_settings2');
+ if(!$||!host?.length||$('#folio-settings').length||renderingSettings)return;
+ renderingSettings=true;
+ try{
+  const markup=await ctx.renderExtensionTemplateAsync(TEMPLATE,'settings');
+  if(!$('#folio-settings').length)host.append(markup);
+  syncPanel($('#folio-settings'));
+ }catch(e){console.error('[Folio] settings render failed',e);}
+ finally{renderingSettings=false;}
+}
 function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(document).on('input.folio change.folio','#folio-settings [data-folio-setting]',function(){const k=this.dataset.folioSetting;if(!(k in DEFAULTS))return;let v=this.type==='checkbox'?this.checked:this.value;if(k==='fontScale')v=clamp(v,.8,1.4);if(k==='lineHeight')v=clamp(v,1.4,2.4);if(k==='measure')v=clamp(v,28,60);if(k==='paragraphGap')v=clamp(v,0,1.6);if(k==='backgroundOpacity')v=clamp(v,0,.85);if(k==='watermarkOpacity')v=clamp(v,0,1);s[k]=v;const o=$('#folio-settings').find('[data-folio-output="'+k+'"]');if(o.length)o.text(k==='watermarkOpacity'?`${Math.round(Number(v)*100)}%`:v);save();});$(document).on('click.folio','#folio-reset',function(){Object.assign(s,structuredClone(DEFAULTS));syncPanel($('#folio-settings'));save();});}
 apply();bind();render();
+let observedChat=null;
+const watermarkResizeObserver=new ResizeObserver(()=>{const layer=document.getElementById(WATERMARK_ID);if(layer)positionWatermarkLayer(layer);});
+function watchChatBounds(){const chat=document.getElementById('chat');if(chat&&chat!==observedChat){observedChat=chat;watermarkResizeObserver.observe(chat);}const layer=document.getElementById(WATERMARK_ID);if(layer)positionWatermarkLayer(layer);}
+window.addEventListener('resize',watchChatBounds,{passive:true});
+window.addEventListener('scroll',watchChatBounds,true);
 const mo=new MutationObserver(()=>{
  if(!document.getElementById('folio-settings'))render();
  const layer=document.getElementById(WATERMARK_ID),chat=document.getElementById('chat');
  if(chat&&layer?.parentElement!==chat)ensureWatermarkLayer();
+ watchChatBounds();
 });
 if(document.body)mo.observe(document.body,{childList:true,subtree:true});
-window.FolioTheme={apply,getSettings:()=>({...s}),getWatermarkStatus:()=>{const el=document.getElementById(WATERMARK_ID);return {exists:!!el,visible:!!el&&!el.hidden,opacity:el?.style.opacity??null,svg:!!el?.querySelector('svg'),parent:el?.parentElement?.id??null,rect:el?(()=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height,top:r.top,left:r.left}})():null};},reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.3.9 loaded');
+watchChatBounds();
+window.FolioTheme={__loaded:true,apply,getSettings:()=>({...s}),getWatermarkStatus:()=>{const el=document.getElementById(WATERMARK_ID);return {exists:!!el,visible:!!el&&!el.hidden,opacity:el?.style.opacity??null,svg:!!el?.querySelector('svg'),parent:el?.parentElement?.id??null,position:el?.style.position??null,rect:el?(()=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height,top:r.top,left:r.left}})():null};},reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
+console.info('[Folio] 1.4.0 loaded');
 })();
