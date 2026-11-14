@@ -2,7 +2,6 @@
 (() => {
 'use strict';
 if (window.__folioInstanceLoaded) { console.info('[Folio] duplicate script load ignored'); return; }
-window.__folioInstanceLoaded = true;
 const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
 const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.6};
 const PALETTES={
@@ -13,6 +12,7 @@ const PALETTES={
 'violet-archive':{body:'#E7E0F2',em:'#B7A9CC',accent:'#A98BD4',quote:'#F5EFFC',panel:'rgba(35,27,49,.97)',chat:'rgba(27,21,39,.97)',shadow:'rgba(8,4,16,.5)',border:'rgba(190,164,222,.2)',tick:'#1B1527'}};
 const FONTS={'noto-serif':'var(--mz-serif)','noto-sans':'var(--mz-sans)','kaiti':'var(--mz-kai)','system-serif':'serif','system-sans':'sans-serif'};
 const ctx=window.SillyTavern?.getContext?.();if(!ctx){console.warn('[Folio] ST context unavailable');return;}
+window.__folioInstanceLoaded = true;
 const all=ctx.extensionSettings??(ctx.extensionSettings={});all[KEY]??=structuredClone(DEFAULTS);const s=all[KEY];for(const[k,v]of Object.entries(DEFAULTS))if(s[k]===undefined)s[k]=v;if(s.watermarkOpacity===.08||s.watermarkOpacity===.16)s.watermarkOpacity=.6;
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Number(v)||a));
 function setVar(root,key,value,important=false){root.style.setProperty(key,value,important?'important':'');}
