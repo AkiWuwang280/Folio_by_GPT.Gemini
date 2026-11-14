@@ -34,14 +34,21 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
+}
+
+#paper-theme-texture-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
     background-image: radial-gradient(rgba(255,255,255,.7) .55px, transparent .7px);
     background-size: 5px 5px;
     opacity: var(--paper-texture-opacity, 0);
 }
 
-body > *:not(#paper-theme-background-layer) {
+body > *:not(#paper-theme-background-layer):not(#paper-theme-texture-layer) {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 :root.paper-theme-enabled #chat .mes {
