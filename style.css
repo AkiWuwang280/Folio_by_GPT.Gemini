@@ -20,7 +20,7 @@
 }
 
 /* Background is applied as a body background, never as a covering fixed layer. */
-body.folio-enabled {
+body.folio-enabled.folio-has-background {
     background-image: var(--folio-background);
     background-size: cover;
     background-position: center center;
