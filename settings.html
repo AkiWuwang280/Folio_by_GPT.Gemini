@@ -1,28 +1,38 @@
 <div id="folio-settings" class="folio-settings">
- <div class="inline-drawer">
-  <div class="inline-drawer-toggle inline-drawer-header"><b>页序 · Folio</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
-  <div class="inline-drawer-content">
-   <div class="folio-intro"><span class="folio-kicker">A QUIET READING INTERFACE</span><p>把聊天排成一页舒展、清晰的文字。</p><span class="folio-version">1.1.0</span></div>
-   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>主题配色</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
-    <label for="folio-palette">配色方案</label><select id="folio-palette" data-folio-setting="palette"><option value="ink-night">墨夜</option><option value="warm-paper">暖纸</option><option value="mist-water">雾青</option><option value="sakura">樱笺</option></select><p class="folio-hint">配色与背景图片独立设置。</p>
-   </div></div>
-   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>背景</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
-    <label for="folio-bg">背景图片地址</label><input id="folio-bg" type="url" data-folio-setting="backgroundUrl" placeholder="https://…">
-    <div class="folio-range-label"><label for="folio-opacity">背景遮罩</label><output data-folio-output="backgroundOpacity">0.22</output></div><input id="folio-opacity" type="range" min="0" max=".85" step=".01" data-folio-setting="backgroundOpacity"><p class="folio-hint">留空则不覆盖酒馆当前背景。</p>
-   </div></div>
-   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>字体与排版</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
-    <div class="folio-range-label"><label for="folio-size">正文字号比例</label><output data-folio-output="fontScale">1.06</output></div><input id="folio-size" type="range" min=".8" max="1.4" step=".01" data-folio-setting="fontScale">
-    <div class="folio-range-label"><label for="folio-line">行高</label><output data-folio-output="lineHeight">1.95</output></div><input id="folio-line" type="range" min="1.4" max="2.4" step=".05" data-folio-setting="lineHeight">
-    <div class="folio-range-label"><label for="folio-measure">每行字数上限</label><output data-folio-output="measure">40</output></div><input id="folio-measure" type="range" min="28" max="60" step="1" data-folio-setting="measure">
-    <div class="folio-range-label"><label for="folio-gap">段落间距</label><output data-folio-output="paragraphGap">0.75</output></div><input id="folio-gap" type="range" min="0" max="1.6" step=".05" data-folio-setting="paragraphGap">
-    <label for="folio-char-font">角色正文字体</label><input id="folio-char-font" type="text" data-folio-setting="charFont" placeholder="默认：宋体 / 衬线体">
-    <label for="folio-user-font">玩家正文字体</label><input id="folio-user-font" type="text" data-folio-setting="userFont" placeholder="默认：无衬线体">
-   </div></div>
-   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>消息版式</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
-    <label class="folio-check"><input type="checkbox" data-folio-setting="pageNumbers"> 显示消息页码</label><label class="folio-check"><input type="checkbox" data-folio-setting="openingPage"> 首条消息采用扉页留白</label><label class="folio-check"><input type="checkbox" data-folio-setting="rules"> 显示页眉细线与页脚分隔</label>
-    <p class="folio-hint">头像、消息留白和头像与正文间距采用参考版式默认比例，窄屏自动收紧。</p>
-   </div></div>
-   <div class="folio-footer"><button id="folio-reset" type="button" class="menu_button">恢复默认设置</button><span>调整自动保存</span></div>
+  <div class="inline-drawer">
+    <div class="inline-drawer-toggle inline-drawer-header"><b>页序 · Folio</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
+    <div class="inline-drawer-content">
+      <div class="folio-intro"><span class="folio-kicker">A QUIET READING INTERFACE</span><p>把聊天排成一页舒展、清晰的文字。</p><span class="folio-version">1.2.0</span></div>
+      <div class="inline-drawer folio-subdrawer">
+        <div class="inline-drawer-toggle inline-drawer-header"><b>主题配色</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
+        <div class="inline-drawer-content"><label>配色方案</label><select data-folio-setting="palette"><option value="ink-night">墨夜 · 石墨与纸白</option><option value="warm-paper">暖纸 · 奶油与古金</option><option value="mist-water">雾青 · 清水与薄荷</option><option value="sakura">樱笺 · 樱粉与暖白</option></select><p class="folio-hint">配色只控制界面颜色；背景图片可以独立设置。</p></div>
+      </div>
+      <div class="inline-drawer folio-subdrawer">
+        <div class="inline-drawer-toggle inline-drawer-header"><b>背景</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
+        <div class="inline-drawer-content"><label>背景图片地址</label><input type="url" data-folio-setting="backgroundUrl" placeholder="https://…"><div class="folio-range-label"><label>背景遮罩</label><output data-folio-output="backgroundOpacity">0.22</output></div><input type="range" min="0" max=".85" step=".01" data-folio-setting="backgroundOpacity"><p class="folio-hint">支持公开可访问的图片 URL；留空时保留主题原有背景。</p></div>
+      </div>
+      <div class="inline-drawer folio-subdrawer">
+        <div class="inline-drawer-toggle inline-drawer-header"><b>字体与排版</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
+        <div class="inline-drawer-content">
+          <label>角色正文字体</label><select data-folio-setting="charFont"><option value="noto-serif">思源宋体 · Noto Serif SC</option><option value="noto-sans">思源黑体 · Noto Sans SC</option><option value="kaiti">楷体 · 设备支持时使用</option><option value="system-serif">系统衬线字体</option><option value="system-sans">系统无衬线字体</option></select>
+          <label>玩家正文字体</label><select data-folio-setting="userFont"><option value="noto-sans">思源黑体 · Noto Sans SC</option><option value="noto-serif">思源宋体 · Noto Serif SC</option><option value="kaiti">楷体 · 设备支持时使用</option><option value="system-serif">系统衬线字体</option><option value="system-sans">系统无衬线字体</option></select>
+          <div class="folio-range-label"><label>正文字号比例</label><output data-folio-output="fontScale">1.06</output></div><input type="range" min=".8" max="1.4" step=".01" data-folio-setting="fontScale">
+          <div class="folio-range-label"><label>行高</label><output data-folio-output="lineHeight">1.95</output></div><input type="range" min="1.4" max="2.4" step=".05" data-folio-setting="lineHeight">
+          <div class="folio-range-label"><label>每行字数上限</label><output data-folio-output="measure">40</output></div><input type="range" min="28" max="60" step="1" data-folio-setting="measure">
+          <div class="folio-range-label"><label>段落间距</label><output data-folio-output="paragraphGap">0.75</output></div><input type="range" min="0" max="1.6" step=".05" data-folio-setting="paragraphGap">
+          <p class="folio-hint">字体使用内置字体栈，不需要手动猜字体名称；设备缺少楷体时会自动回退。</p>
+        </div>
+      </div>
+      <div class="inline-drawer folio-subdrawer">
+        <div class="inline-drawer-toggle inline-drawer-header"><b>消息版式</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
+        <div class="inline-drawer-content">
+          <label class="folio-check"><input type="checkbox" data-folio-setting="pageNumbers"> 显示消息页码</label>
+          <label class="folio-check"><input type="checkbox" data-folio-setting="openingPage"> 首条消息采用扉页留白</label>
+          <label class="folio-check"><input type="checkbox" data-folio-setting="rules"> 显示消息分隔线</label>
+          <p class="folio-hint">头像尺寸、消息留白、头像与正文间距沿用原作者的桌面与手机参数。</p>
+        </div>
+      </div>
+      <div class="folio-footer"><button id="folio-reset" type="button" class="menu_button">恢复默认设置</button><span>调整后自动保存</span></div>
+    </div>
   </div>
- </div>
 </div>
