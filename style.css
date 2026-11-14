@@ -25,3 +25,10 @@ body.folio-rules #chat .mes .mes_text{left:0;margin-top:10px!important;margin-bo
 body.folio-rules #chat .mes .swipe_right,body.folio-rules #chat .mes .swipe_left{bottom:10px}
 body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono);font-size:.72em;color:var(--mz-meta)}
 @media screen and (max-width:1000px){body.folio-rules #chat .mes .mes_text{padding:10px 12px!important}}
+/* Folio 顶部栏与底部输入区同风格美化 */
+#top-settings-holder{background:var(--SmartThemeBlurTintColor)!important;border-bottom:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor))!important;box-shadow:none!important;backdrop-filter:blur(8px)}
+#top-settings-holder .drawer-icon{color:var(--SmartThemeEmColor);opacity:.82;transition:color .2s,opacity .2s}
+#top-settings-holder .drawer-icon:hover,#top-settings-holder .drawer-icon.openIcon{color:var(--SmartThemeUnderlineColor)!important;opacity:1}
+#send_form{background:var(--SmartThemeBlurTintColor)!important;border-top:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor))!important;box-shadow:none!important}
+#send_form .interactable,#send_form .fa-solid,#send_form .fa-regular{color:var(--SmartThemeEmColor);transition:color .2s}
+#send_form .interactable:hover{color:var(--SmartThemeUnderlineColor)}
