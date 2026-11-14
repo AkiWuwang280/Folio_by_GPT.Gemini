@@ -47,7 +47,9 @@ body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono
 #send_form,#form_sheld{background:var(--SmartThemeChatTintColor)!important;box-shadow:none!important;border-top:0!important;margin-top:0!important}
 #form_sheld::before,#send_form::before{display:none!important}
 #qr--bar,#nonQRFormItems{background-color:transparent!important;box-shadow:none!important;border-top:0!important;border-bottom:0!important}
-#chat{border-bottom:0!important;margin-bottom:0!important}
+#chat{border-bottom:0!important;margin-bottom:0!important;padding-bottom:0!important}
+#form_sheld{margin-top:0!important;padding-top:4px!important;border-top:0!important;background:var(--SmartThemeChatTintColor)!important}
+#sheld>hr,#drag_bar{border:0!important;background:var(--SmartThemeChatTintColor)!important}
 
 /* ===== Icon system: nine equal navigation slots ===== */
 #top-settings-holder{
@@ -111,12 +113,11 @@ body.folio-light #extensionsMenuButton::before,body.folio-light #send_but::befor
 /* ===== MEMENTO watermark: inside the reading canvas, above its background ===== */
 #chat{position:relative!important}
 #folio-watermark-layer{
- position:fixed;left:0;top:0;width:100%;height:100%;
- overflow:visible;pointer-events:none;z-index:2;color:var(--SmartThemeBodyColor);
- opacity:1;contain:paint
+ position:fixed;inset:0;pointer-events:none;z-index:2;color:var(--SmartThemeBodyColor);
+ overflow:visible;opacity:1;contain:none
 }
 #folio-watermark-layer[hidden]{display:none!important}
-#folio-watermark-layer svg{position:absolute;right:-24px;bottom:8px;width:min(82vw,560px);height:min(82vw,560px);display:block;overflow:visible}
+#folio-watermark-layer svg{position:fixed;right:-24px;bottom:56px;width:min(82vw,560px);height:min(82vw,560px);display:block;overflow:visible}
 #folio-watermark-layer circle,#folio-watermark-layer path{fill:none;stroke:currentColor;stroke-opacity:.27;stroke-linecap:round;stroke-linejoin:round}
 #folio-watermark-layer circle[fill="currentColor"]{fill:currentColor;stroke:none;opacity:.3}
 #chat>.mes{position:relative;z-index:auto}
