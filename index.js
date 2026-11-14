@@ -1,8 +1,8 @@
-/* Folio 1.3.4 — restrained drop cap, visible watermark and larger controls */
+/* Folio 1.3.5 — visible watermark, restored navigation states and corrected controls */
 (() => {
 'use strict';
 const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
-const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.16};
+const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.6};
 const PALETTES={
 'ink-night':{body:'#E0DCD4',em:'#9C978F',accent:'#E87046',quote:'#F6F3ED',panel:'rgba(27,26,24,.97)',chat:'rgba(20,19,18,.96)',shadow:'rgba(0,0,0,.45)',border:'rgba(224,220,212,.14)',tick:'#141312'},
 'warm-paper':{body:'#231F20',em:'#57524B',accent:'#7A5C2C',quote:'#0E0C0D',panel:'#F3F0E9',chat:'#FAF8F3',shadow:'rgba(40,30,20,.16)',border:'rgba(35,31,32,.34)',tick:'#FAF8F3'},
@@ -11,7 +11,7 @@ const PALETTES={
 'violet-archive':{body:'#E7E0F2',em:'#B7A9CC',accent:'#A98BD4',quote:'#F5EFFC',panel:'rgba(35,27,49,.97)',chat:'rgba(27,21,39,.97)',shadow:'rgba(8,4,16,.5)',border:'rgba(190,164,222,.2)',tick:'#1B1527'}};
 const FONTS={'noto-serif':'var(--mz-serif)','noto-sans':'var(--mz-sans)','kaiti':'var(--mz-kai)','system-serif':'serif','system-sans':'sans-serif'};
 const ctx=window.SillyTavern?.getContext?.();if(!ctx){console.warn('[Folio] ST context unavailable');return;}
-const all=ctx.extensionSettings??(ctx.extensionSettings={});all[KEY]??=structuredClone(DEFAULTS);const s=all[KEY];for(const[k,v]of Object.entries(DEFAULTS))if(s[k]===undefined)s[k]=v;if(s.watermarkOpacity===.08)s.watermarkOpacity=.16;
+const all=ctx.extensionSettings??(ctx.extensionSettings={});all[KEY]??=structuredClone(DEFAULTS);const s=all[KEY];for(const[k,v]of Object.entries(DEFAULTS))if(s[k]===undefined)s[k]=v;if(s.watermarkOpacity===.08||s.watermarkOpacity===.16)s.watermarkOpacity=.6;
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Number(v)||a));
 function setVar(root,key,value,important=false){root.style.setProperty(key,value,important?'important':'');}
 function apply(){
@@ -34,18 +34,18 @@ function apply(){
  document.body.classList.toggle('no-mesIDDisplay',!s.pageNumbers);
  document.body.classList.toggle('folio-opening-page',!!s.openingPage);
  document.body.classList.toggle('folio-rules',!!s.rules);document.body.classList.toggle('folio-watermark',!!s.watermark);
-setVar(root,'--folio-watermark-opacity',clamp(s.watermarkOpacity,0,.25));
+setVar(root,'--folio-watermark-opacity',clamp(s.watermarkOpacity,0,1));
 }
 function save(){apply();ctx.saveSettingsDebounced?.();}
 function syncPanel(panel){
  panel.find('[data-folio-setting]').each(function(){const k=this.dataset.folioSetting;if(!(k in s))return;if(this.type==='checkbox')this.checked=!!s[k];else this.value=s[k]??'';});
- panel.find('[data-folio-output]').each(function(){this.textContent=s[this.dataset.folioOutput];});
+ panel.find('[data-folio-output]').each(function(){const k=this.dataset.folioOutput;this.textContent=k==='watermarkOpacity'?`${Math.round(Number(s[k])*100)}%`:s[k];});
 }
 async function render(){const $=window.jQuery,host=$?.('#extensions_settings2');if(!$||!host?.length||$('#folio-settings').length)return;try{host.append(await ctx.renderExtensionTemplateAsync(TEMPLATE,'settings'));syncPanel($('#folio-settings'));}catch(e){console.error('[Folio] settings render failed',e);}}
-function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(document).on('input.folio change.folio','#folio-settings [data-folio-setting]',function(){const k=this.dataset.folioSetting;if(!(k in DEFAULTS))return;let v=this.type==='checkbox'?this.checked:this.value;if(k==='fontScale')v=clamp(v,.8,1.4);if(k==='lineHeight')v=clamp(v,1.4,2.4);if(k==='measure')v=clamp(v,28,60);if(k==='paragraphGap')v=clamp(v,0,1.6);if(k==='backgroundOpacity')v=clamp(v,0,.85);if(k==='watermarkOpacity')v=clamp(v,0,.25);s[k]=v;const o=$('#folio-settings').find('[data-folio-output="'+k+'"]');if(o.length)o.text(v);save();});$(document).on('click.folio','#folio-reset',function(){Object.assign(s,structuredClone(DEFAULTS));syncPanel($('#folio-settings'));save();});}
+function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(document).on('input.folio change.folio','#folio-settings [data-folio-setting]',function(){const k=this.dataset.folioSetting;if(!(k in DEFAULTS))return;let v=this.type==='checkbox'?this.checked:this.value;if(k==='fontScale')v=clamp(v,.8,1.4);if(k==='lineHeight')v=clamp(v,1.4,2.4);if(k==='measure')v=clamp(v,28,60);if(k==='paragraphGap')v=clamp(v,0,1.6);if(k==='backgroundOpacity')v=clamp(v,0,.85);if(k==='watermarkOpacity')v=clamp(v,0,1);s[k]=v;const o=$('#folio-settings').find('[data-folio-output="'+k+'"]');if(o.length)o.text(k==='watermarkOpacity'?`${Math.round(Number(v)*100)}%`:v);save();});$(document).on('click.folio','#folio-reset',function(){Object.assign(s,structuredClone(DEFAULTS));syncPanel($('#folio-settings'));save();});}
 apply();bind();render();
 const mo=new MutationObserver(()=>{if(!document.getElementById('folio-settings'))render();});
 const host=document.getElementById('extensions_settings2');if(host)mo.observe(host,{childList:true});
 window.FolioTheme={apply,getSettings:()=>({...s}),reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.3.4 loaded');
+console.info('[Folio] 1.3.5 loaded');
 })();
