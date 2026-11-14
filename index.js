@@ -1,7 +1,7 @@
 /* Folio 1.3.2 — repair loader and watermark controls */
 (() => {
 'use strict';
-const KEY='folio_theme', TEMPLATE='third-party/PaperTheme_by_gpt';
+const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
 const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.08};
 const PALETTES={
 'ink-night':{body:'#E0DCD4',em:'#9C978F',accent:'#E87046',quote:'#F6F3ED',panel:'rgba(27,26,24,.97)',chat:'rgba(20,19,18,.96)',shadow:'rgba(0,0,0,.45)',border:'rgba(224,220,212,.14)',tick:'#141312'},
