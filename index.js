@@ -1,4 +1,4 @@
-/* Folio 1.4.1 — persistent watermark, guarded settings render, refined navigation */
+/* Folio 1.4.2 — chat-anchored watermark and raised navigation */
 (() => {
 'use strict';
 if (window.__folioInstanceLoaded) { console.info('[Folio] duplicate script load ignored'); return; }
@@ -36,9 +36,15 @@ function ensureWatermarkLayer(){
   add('circle',{cx:342,cy:248,r:3,fill:'currentColor',stroke:'none'});
   layer.appendChild(svg);
  }
- const host=document.body;
- if(layer.parentElement!==host)host.appendChild(layer);
+ const host=document.getElementById('chat')||document.body;
+ if(layer.parentElement!==host)host.prepend(layer);
+ positionWatermarkLayer(layer);
  return layer;
+}
+function positionWatermarkLayer(layer){
+ const chat=document.getElementById('chat');if(!chat||!layer)return;
+ const r=chat.getBoundingClientRect();
+ Object.assign(layer.style,{position:'fixed',left:`${r.left}px`,top:`${r.top}px`,width:`${r.width}px`,height:`${r.height}px`});
 }
 function apply(){
  const root=document.documentElement,p=PALETTES[s.palette]||PALETTES['ink-night'];
@@ -84,15 +90,27 @@ async function render(){
 }
 function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(document).on('input.folio change.folio','#folio-settings [data-folio-setting]',function(){const k=this.dataset.folioSetting;if(!(k in DEFAULTS))return;let v=this.type==='checkbox'?this.checked:this.value;if(k==='fontScale')v=clamp(v,.8,1.4);if(k==='lineHeight')v=clamp(v,1.4,2.4);if(k==='measure')v=clamp(v,28,60);if(k==='paragraphGap')v=clamp(v,0,1.6);if(k==='backgroundOpacity')v=clamp(v,0,.85);if(k==='watermarkOpacity')v=clamp(v,0,1);s[k]=v;const o=$('#folio-settings').find('[data-folio-output="'+k+'"]');if(o.length)o.text(k==='watermarkOpacity'?`${Math.round(Number(v)*100)}%`:v);save();});$(document).on('click.folio','#folio-reset',function(){Object.assign(s,structuredClone(DEFAULTS));syncPanel($('#folio-settings'));save();});}
 apply();bind();render();
+let observedChat=null;
+const watermarkResizeObserver=new ResizeObserver(()=>{
+ const layer=document.getElementById(WATERMARK_ID);if(layer)positionWatermarkLayer(layer);
+});
+function watchChatBounds(){
+ const chat=document.getElementById('chat');
+ if(chat&&chat!==observedChat){observedChat=chat;watermarkResizeObserver.observe(chat);}
+ const layer=document.getElementById(WATERMARK_ID);if(layer)positionWatermarkLayer(layer);
+}
+window.addEventListener('resize',watchChatBounds,{passive:true});
+window.addEventListener('scroll',watchChatBounds,true);
 const mo=new MutationObserver(()=>{
  if(!document.getElementById('folio-settings'))render();
- const layer=document.getElementById(WATERMARK_ID);
- if(!layer||layer.parentElement!==document.body)ensureWatermarkLayer();
+ const layer=document.getElementById(WATERMARK_ID),chat=document.getElementById('chat');
+ if(chat&&layer?.parentElement!==chat)ensureWatermarkLayer();
+ watchChatBounds();
 });
 if(document.body){
  mo.observe(document.body,{childList:true,subtree:true});
- ensureWatermarkLayer();
+ watchChatBounds();
 }
 window.FolioTheme={__loaded:true,apply,getSettings:()=>({...s}),getWatermarkStatus:()=>{const el=document.getElementById(WATERMARK_ID);return {exists:!!el,visible:!!el&&!el.hidden,opacity:el?.style.opacity??null,svg:!!el?.querySelector('svg'),parent:el?.parentElement?.id??null,position:el?.style.position??null,rect:el?(()=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height,top:r.top,left:r.left}})():null};},reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.4.1 loaded');
+console.info('[Folio] 1.4.2 loaded');
 })();
