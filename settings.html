@@ -9,8 +9,13 @@
       </div>
       <div class="inline-drawer folio-subdrawer">
         <div class="inline-drawer-toggle inline-drawer-header"><b>背景</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
-        <div class="inline-drawer-content"><label>背景图片地址</label><input type="url" data-folio-setting="backgroundUrl" placeholder="https://…"><div class="folio-range-label"><label>背景遮罩</label><output data-folio-output="backgroundOpacity">0.22</output></div><input type="range" min="0" max=".85" step=".01" data-folio-setting="backgroundOpacity"><p class="folio-hint">支持公开可访问的图片 URL；留空时保留主题原有背景。</p></div>
-      </div>
+       <div class="inline-drawer-content">
+          <label>背景图片地址</label><input type="url" data-folio-setting="backgroundUrl" placeholder="https://...">
+          <div class="folio-range-label"><label>背景遮罩</label><output data-folio-output="backgroundOpacity">0.22</output></div><input type="range" min="0" max=".85" step=".01" data-folio-setting="backgroundOpacity">
+          <label class="folio-check"><input type="checkbox" data-folio-setting="watermark"><span>MEMENTO 几何暗纹</span></label>
+          <div class="folio-range-label"><label>暗纹透明度</label><output data-folio-output="watermarkOpacity">0.08</output></div><input type="range" min="0" max=".25" step=".01" data-folio-setting="watermarkOpacity">
+          <p class="folio-hint">支持公开访问的图片 URL；留空时保留主题原有背景。</p>
+        </div>
       <div class="inline-drawer folio-subdrawer">
         <div class="inline-drawer-toggle inline-drawer-header"><b>字体与排版</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
         <div class="inline-drawer-content">
