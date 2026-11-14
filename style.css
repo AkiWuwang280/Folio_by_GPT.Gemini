@@ -25,7 +25,7 @@
 
 /* ===== Reading layout ===== */
 /* Keep the opening-page initial restrained; cancel the theme's two-line raised initial. */
-#chat .mes[mesid="0"] .mes_text > p:first-child::first-letter{initial-letter:normal!important;font-size:1.3em!important;line-height:1!important;}
+#chat .mes[mesid="0"] .mes_text > p:first-child::first-letter,#chat .mes_text hr + p::first-letter{initial-letter:normal!important;font-size:1.3em!important;line-height:1!important;}
 body:not(.no-mesIDDisplay) #chat .mes:not(.smallSysMes)::before{content:"\25C7\2002" attr(mesid) "\2002\25C7";font-family:var(--mz-serif);font-size:calc(var(--mainFontSize) * .85);letter-spacing:.12em;width:min(220px,var(--mz-axis-w));left:calc(var(--mz-col) + var(--mz-axis-w) / 2);transform:translateX(-50%);background:linear-gradient(var(--mz-hairline),var(--mz-hairline)) left center/28% 1px no-repeat,linear-gradient(var(--mz-hairline),var(--mz-hairline)) right center/28% 1px no-repeat}
 body.folio-rules #chat .mes .mes_text{left:0;margin-top:10px!important;margin-bottom:16px!important;padding:12px 16px!important;border-top:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor));border-bottom:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor));background:linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/1px 10px no-repeat}
 body.folio-rules #chat .mes .swipe_right,body.folio-rules #chat .mes .swipe_left{bottom:10px}
@@ -52,7 +52,7 @@ body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono
 
 /* ===== Icon system: one implementation, pseudo-elements only ===== */
 #top-settings-holder{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;padding:4px 3px!important;gap:2px!important}
-#top-settings-holder>.drawer{flex:0 0 auto!important}
+#top-settings-holder>.drawer{flex:0 0 50px!important;width:50px!important;min-width:50px!important;max-width:50px!important;margin:0!important;padding:0!important}
 #top-settings-holder .drawer-icon.openIcon{box-shadow:inset 0 -3px 0 -1px var(--SmartThemeUnderlineColor)!important}
 #top-settings-holder .drawer-icon,
 #options_button,
@@ -86,6 +86,7 @@ body.folio-light #mes_stop::before{filter:invert(.88) hue-rotate(180deg) contras
 #top-settings-holder>.drawer:nth-child(9) .drawer-icon::before{background-image:url("icons/09_top_characters.png")!important}
 #options_button::before{background-image:url("icons/10_bottom_options_menu.png")!important}
 #extensionsMenuButton::before{background-image:url("icons/11_bottom_extensions_quill.png")!important}
+#send_but{transform:translateY(-4px)!important}
 #send_but::before{background-image:url("icons/12_bottom_send_letter.png")!important}
 #mes_stop::before{background-image:url("icons/13_bottom_stop_seal.png")!important}
 
