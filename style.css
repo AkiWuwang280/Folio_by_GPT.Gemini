@@ -144,3 +144,10 @@ body.folio-watermark::after {
   color: var(--SmartThemeBodyColor) !important;
   opacity: 0.78;
 }
+/* 关闭首字放大与变色 */
+#chat .mes[mesid="0"] .mes_text > p:first-child::first-letter,
+#chat .mes_text hr + p::first-letter {
+  initial-letter: normal !important;
+  font-weight: inherit !important;
+  margin-right: 0 !important;
+}
