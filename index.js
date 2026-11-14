@@ -1,4 +1,4 @@
-/* Folio 1.3.7 — dedicated SVG watermark layer */
+/* Folio 1.3.8 — dedicated SVG watermark layer */
 (() => {
 'use strict';
 const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
@@ -18,21 +18,25 @@ function setVar(root,key,value,important=false){root.style.setProperty(key,value
 const WATERMARK_ID='folio-watermark-layer';
 function ensureWatermarkLayer(){
  let layer=document.getElementById(WATERMARK_ID);
- if(layer)return layer;
- layer=document.createElement('div');layer.id=WATERMARK_ID;layer.setAttribute('aria-hidden','true');
- const ns='http://www.w3.org/2000/svg';
- const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 420 420');svg.setAttribute('preserveAspectRatio','xMidYMid meet');
- const add=(tag,attrs)=>{const el=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,String(v)));svg.appendChild(el);};
- add('circle',{cx:286,cy:286,r:168,'stroke-dasharray':'180 34 62 24','stroke-width':2.2});
- add('circle',{cx:286,cy:286,r:124,'stroke-dasharray':'96 28 140 42','stroke-width':1.8});
- add('circle',{cx:286,cy:286,r:78,'stroke-dasharray':'48 18','stroke-width':1.6});
- add('path',{d:'M92 286 H408 M286 84 V408','stroke-width':1.35,'stroke-dasharray':'3 7'});
- add('path',{d:'M230 326 V248 L286 294 L342 248 V326','stroke-width':2.2});
- add('path',{d:'M286 210 L294 218 L286 226 L278 218 Z M138 352 L148 362 L138 372 L128 362 Z','stroke-width':1.8});
- add('circle',{cx:138,cy:362,r:22,'stroke-dasharray':'18 10','stroke-width':1.6});
- add('circle',{cx:230,cy:248,r:3,fill:'currentColor',stroke:'none'});
- add('circle',{cx:342,cy:248,r:3,fill:'currentColor',stroke:'none'});
- layer.appendChild(svg);document.body.appendChild(layer);return layer;
+ if(!layer){
+  layer=document.createElement('div');layer.id=WATERMARK_ID;layer.setAttribute('aria-hidden','true');
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 420 420');svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+  const add=(tag,attrs)=>{const el=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,String(v)));svg.appendChild(el);};
+  add('circle',{cx:286,cy:286,r:168,'stroke-dasharray':'180 34 62 24','stroke-width':2.2});
+  add('circle',{cx:286,cy:286,r:124,'stroke-dasharray':'96 28 140 42','stroke-width':1.8});
+  add('circle',{cx:286,cy:286,r:78,'stroke-dasharray':'48 18','stroke-width':1.6});
+  add('path',{d:'M92 286 H408 M286 84 V408','stroke-width':1.35,'stroke-dasharray':'3 7'});
+  add('path',{d:'M230 326 V248 L286 294 L342 248 V326','stroke-width':2.2});
+  add('path',{d:'M286 210 L294 218 L286 226 L278 218 Z M138 352 L148 362 L138 372 L128 362 Z','stroke-width':1.8});
+  add('circle',{cx:138,cy:362,r:22,'stroke-dasharray':'18 10','stroke-width':1.6});
+  add('circle',{cx:230,cy:248,r:3,fill:'currentColor',stroke:'none'});
+  add('circle',{cx:342,cy:248,r:3,fill:'currentColor',stroke:'none'});
+  layer.appendChild(svg);
+ }
+ const host=document.getElementById('chat')||document.body;
+ if(layer.parentElement!==host)host.prepend(layer);
+ return layer;
 }
 function apply(){
  const root=document.documentElement,p=PALETTES[s.palette]||PALETTES['ink-night'];
@@ -56,6 +60,7 @@ function apply(){
  document.body.classList.toggle('folio-rules',!!s.rules);
  const watermark=ensureWatermarkLayer();watermark.hidden=!s.watermark;
  watermark.style.opacity=String(clamp(s.watermarkOpacity,0,1));
+ watermark.dataset.enabled=String(!!s.watermark);
  setVar(root,'--folio-watermark-opacity',clamp(s.watermarkOpacity,0,1));
 }
 function save(){apply();ctx.saveSettingsDebounced?.();}
@@ -68,6 +73,6 @@ function bind(){const $=window.jQuery;if(!$)return;$(document).off('.folio');$(d
 apply();bind();render();
 const mo=new MutationObserver(()=>{if(!document.getElementById('folio-settings'))render();});
 const host=document.getElementById('extensions_settings2');if(host)mo.observe(host,{childList:true});
-window.FolioTheme={apply,getSettings:()=>({...s}),getWatermarkStatus:()=>{const el=document.getElementById(WATERMARK_ID);return {exists:!!el,visible:!!el&&!el.hidden,opacity:el?.style.opacity??null,svg:!!el?.querySelector('svg')};},reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.3.7 loaded');
+window.FolioTheme={apply,getSettings:()=>({...s}),getWatermarkStatus:()=>{const el=document.getElementById(WATERMARK_ID);return {exists:!!el,visible:!!el&&!el.hidden,opacity:el?.style.opacity??null,svg:!!el?.querySelector('svg'),parent:el?.parentElement?.id??null,rect:el?(()=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height,top:r.top,left:r.left}})():null};},reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
+console.info('[Folio] 1.3.8 loaded');
 })();
