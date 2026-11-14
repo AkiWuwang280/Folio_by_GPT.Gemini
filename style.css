@@ -1,199 +1,288 @@
-/* Paper Theme — scoped styles, designed to coexist with the host theme. */
-:root.paper-theme-enabled {
-    --paper-page: #17151e;
-    --paper-surface: #211e2a;
-    --paper-raised: #292535;
-    --paper-text: #e9e3f0;
-    --paper-muted: #aaa1b5;
-    --paper-line: #454052;
-    --paper-accent: #c2a5e8;
-    --paper-ai: #e9e3f0;
-    --paper-user: #e8dff5;
-    --paper-font-size: 16px;
-    --paper-line-height: 1.68;
-    --paper-content-width: 900px;
-    --paper-ai-font: inherit;
-    --paper-user-font: inherit;
-    --paper-texture-opacity: 0.025;
+/* 页序 · Folio — scoped reading styles */
+:root {
+    --folio-ink: #e9e5f2;
+    --folio-muted: #a9a1b9;
+    --folio-line: rgba(191,174,224,.20);
+    --folio-panel: rgba(35,29,49,.48);
+    --folio-card: rgba(42,35,58,.46);
+    --folio-accent: #c4a9e8;
+    --folio-quote: rgba(183,155,220,.10);
+    --folio-font-size: 16px;
+    --folio-line-height: 1.85;
+    --folio-content-width: 860px;
+    --folio-avatar-size: 42px;
+    --folio-message-gap: 18px;
+    --folio-avatar-gap: 14px;
+    --folio-paragraph-gap: .85em;
+    --folio-ai-font: inherit;
+    --folio-user-font: inherit;
+    --folio-background: none;
 }
 
-#paper-theme-background-layer {
-    position: fixed;
-    inset: -22px;
-    z-index: 0;
-    pointer-events: none;
-    background-position: center;
-    background-repeat: no-repeat;
+/* Background is applied as a body background, never as a covering fixed layer. */
+body.folio-enabled {
+    background-image: var(--folio-background);
     background-size: cover;
-    transform: translateZ(0);
-    will-change: opacity, filter;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
-#paper-theme-background-layer::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-
-#paper-theme-texture-layer {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background-image: radial-gradient(rgba(255,255,255,.7) .55px, transparent .7px);
-    background-size: 5px 5px;
-    opacity: var(--paper-texture-opacity, 0);
-}
-
-body > *:not(#paper-theme-background-layer):not(#paper-theme-texture-layer) {
-    position: relative;
-    z-index: 2;
-}
-
-:root.paper-theme-enabled #chat .mes {
-    border: 1px solid var(--paper-line);
+/* Chat messages only: no body-wide position, z-index, or stacking-context rules. */
+#chat .mes {
+    color: var(--folio-ink);
+    margin-block: var(--folio-message-gap) !important;
+    border: 1px solid var(--folio-line);
     border-radius: 10px;
-    background-color: var(--paper-surface);
-    background-color: color-mix(in srgb, var(--paper-surface) 82%, transparent);
+    background: var(--folio-card);
+    padding: 10px 12px;
+    box-sizing: border-box;
 }
 
-:root.paper-theme-enabled #chat .mes .mes_text {
-    max-width: min(100%, var(--paper-content-width));
-    font-size: var(--paper-font-size);
-    line-height: var(--paper-line-height);
-    color: var(--paper-text);
-}
-
-:root.paper-theme-enabled #chat .mes:not([is_user="true"]) .mes_text {
-    font-family: var(--paper-ai-font);
-    color: var(--paper-ai);
-}
-
-:root.paper-theme-enabled #chat .mes[is_user="true"] .mes_text {
-    font-family: var(--paper-user-font);
-    color: var(--paper-user);
-}
-
-:root.paper-theme-enabled #chat .mes .name_text {
-    color: var(--paper-accent);
-}
-
-:root.paper-theme-enabled #chat .mes .mes_text a {
-    color: var(--paper-accent);
-}
-
-:root.paper-theme-enabled #chat .mes .mes_text blockquote {
-    border-left: 2px solid var(--paper-accent);
-    color: var(--paper-muted);
-}
-
-:root.paper-theme-enabled.paper-theme-no-borders #chat .mes {
+body.folio-no-borders #chat .mes {
     border-color: transparent;
+    background: transparent;
 }
 
-:root.paper-theme-enabled #paper-theme-settings {
-    color: var(--paper-text);
+#chat .mes .mes_block {
+    min-width: 0;
+    max-width: var(--folio-content-width);
 }
 
-.paper-settings {
-    --paper-settings-gap: 12px;
-    margin: 8px 0;
-    color: var(--SmartThemeBodyColor, inherit);
+#chat .mes .mes_text {
+    max-width: var(--folio-content-width);
+    color: var(--folio-ink);
+    font-size: var(--folio-font-size);
+    line-height: var(--folio-line-height);
+    overflow-wrap: anywhere;
 }
 
-.paper-settings-intro {
-    margin: 4px 0 14px;
-    color: var(--SmartThemeEmColor, inherit);
-    font-size: 0.92em;
-    line-height: 1.5;
+#chat .mes:not([is_user="true"]) .mes_text {
+    font-family: var(--folio-ai-font);
 }
 
-.paper-settings-group {
+#chat .mes[is_user="true"] .mes_text {
+    font-family: var(--folio-user-font);
+}
+
+#chat .mes .mes_text p {
+    margin-block: 0 var(--folio-paragraph-gap);
+}
+
+#chat .mes .mes_text p:last-child {
+    margin-bottom: 0;
+}
+
+#chat .mes .avatar img,
+#chat .mes .avatar video,
+#chat .mes .mesAvatar img {
+    width: var(--folio-avatar-size);
+    height: var(--folio-avatar-size);
+    object-fit: cover;
+}
+
+#chat .mes .mes_block {
+    margin-inline-start: var(--folio-avatar-gap);
+}
+
+#chat .mes .name_text {
+    color: var(--folio-accent);
+    letter-spacing: .025em;
+}
+
+#chat .mes .timestamp,
+#chat .mes .mes_timer,
+#chat .mes .token_counter {
+    color: var(--folio-muted);
+    opacity: .82;
+    font-size: .78em;
+}
+
+body.folio-quote-style #chat .mes .mes_text blockquote {
+    margin: 1em 0;
+    padding: .55em .9em;
+    border-left: 2px solid var(--folio-accent);
+    background: var(--folio-quote);
+    border-radius: 0 6px 6px 0;
+    color: var(--folio-ink);
+}
+
+body.folio-section-divider #chat .mes .mes_text hr {
+    border: 0;
+    border-top: 1px solid var(--folio-line);
+    margin: 1.5em auto;
+    max-width: 72%;
+}
+
+body.folio-page-number #chat .mes::after {
+    content: counter(folio-message, decimal-leading-zero);
+    display: block;
+    width: fit-content;
+    margin: 8px 0 0 auto;
+    color: var(--folio-muted);
+    opacity: .55;
+    font-size: 10px;
+    letter-spacing: .12em;
+}
+
+body.folio-page-number #chat {
+    counter-reset: folio-message;
+}
+
+body.folio-page-number #chat .mes {
+    counter-increment: folio-message;
+}
+
+/* Extension settings panel */
+.folio-settings {
     margin: 12px 0;
-    padding: 12px;
-    border: 1px solid var(--SmartThemeBorderColor, rgba(127,127,127,.35));
+    padding: 16px;
+    color: var(--SmartThemeBodyColor, var(--folio-ink));
+    border: 1px solid var(--SmartThemeBorderColor, var(--folio-line));
     border-radius: 10px;
-    background: var(--SmartThemeBlurTintColor, rgba(127,127,127,.04));
+    background: var(--SmartThemeBlurTintColor, rgba(40,40,48,.18));
+    font-size:  .95em;
 }
 
-.paper-settings-group h4 {
+.folio-settings-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--SmartThemeBorderColor, var(--folio-line));
+}
+
+.folio-settings-heading h3 {
+    margin: 3px 0 4px;
+    font-size: 1.25em;
+    letter-spacing: .04em;
+}
+
+.folio-settings-heading p,
+.folio-hint {
+    margin: 0;
+    opacity: .72;
+    font-size: .86em;
+    line-height: 1.55;
+}
+
+.folio-eyebrow,
+.folio-version {
+    color: var(--SmartThemeQuoteColor, var(--folio-accent));
+    font-size: .72em;
+    letter-spacing: .14em;
+}
+
+.folio-version {
+    padding: 3px 7px;
+    border: 1px solid var(--SmartThemeBorderColor, var(--folio-line));
+    border-radius: 4px;
+}
+
+.folio-setting-section {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--SmartThemeBorderColor, var(--folio-line));
+}
+
+.folio-setting-section h4 {
     margin: 0 0 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--SmartThemeBorderColor, rgba(127,127,127,.3));
-    font-size: 1em;
+    font-size: .96em;
     font-weight: 600;
 }
 
-.paper-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.folio-setting-row {
+    display: grid;
+    grid-template-columns: minmax(145px, 1fr) minmax(120px, 1.4fr);
+    align-items: center;
+    gap: 12px;
     margin: 10px 0;
-    min-width: 0;
 }
 
-.paper-field > span,
-.paper-check > span {
-    font-size: 0.92em;
+.folio-setting-row label {
+    font-size: .88em;
 }
 
-.paper-field output {
-    color: var(--SmartThemeEmColor, inherit);
+.folio-setting-row output {
+    color: var(--SmartThemeQuoteColor, var(--folio-accent));
     font-variant-numeric: tabular-nums;
 }
 
-.paper-field input,
-.paper-field select {
-    box-sizing: border-box;
+.folio-setting-row input[type="range"] {
     width: 100%;
-    max-width: 100%;
+    min-width: 0;
 }
 
-.paper-field input[type="range"] {
-    accent-color: var(--paper-accent, var(--SmartThemeQuoteColor));
+.folio-setting-row select,
+.folio-setting-row input[type="text"],
+.folio-setting-row input[type="url"] {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
-.paper-check {
+.folio-setting-stack {
+    display: block;
+}
+
+.folio-setting-stack label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.folio-setting-stack small {
+    display: block;
+    margin-top: 2px;
+    opacity: .65;
+}
+
+.folio-check-row {
     display: flex;
     align-items: center;
+    gap: 9px;
+    margin: 9px 0;
+    font-size: .9em;
+}
+
+.folio-check-row input {
+    margin: 0;
+}
+
+.folio-hint {
+    margin-top: 9px;
+}
+
+.folio-settings-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 10px;
-    padding: 4px 0;
+    padding-top: 14px;
 }
 
-.paper-check input {
-    flex: 0 0 auto;
+.folio-settings-footer span {
+    font-size: .8em;
+    opacity: .65;
 }
 
-.paper-hint,
-.paper-settings-footer small {
-    display: block;
-    margin: 8px 0 0;
-    color: var(--SmartThemeEmColor, inherit);
-    font-size: 0.82em;
-    line-height: 1.45;
-    opacity: 0.82;
-}
-
-.paper-settings-footer {
-    display: grid;
-    gap: 8px;
-    margin-top: 14px;
-}
-
-@media (max-width: 600px) {
-    .paper-settings-group {
-        padding: 10px;
-        margin: 10px 0;
+@media (max-width: 700px) {
+    #chat .mes {
+        padding: 8px;
+        border-radius: 8px;
     }
 
-    .paper-field {
-        gap: 8px;
+    .folio-settings {
+        padding: 12px;
     }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-    #paper-theme-background-layer {
-        transition: opacity .18s ease, filter .18s ease;
+    .folio-setting-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .folio-settings-footer {
+        align-items: flex-start;
+        flex-direction: column;
     }
 }
