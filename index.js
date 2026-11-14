@@ -17,7 +17,7 @@ function setVar(root,key,value,important=false){root.style.setProperty(key,value
 function apply(){
  const root=document.documentElement,p=PALETTES[s.palette]||PALETTES['ink-night'];
  const vars={'--SmartThemeBodyColor':p.body,'--SmartThemeEmColor':p.em,'--SmartThemeUnderlineColor':p.accent,'--SmartThemeQuoteColor':p.quote,'--SmartThemeBlurTintColor':p.panel,'--SmartThemeChatTintColor':p.chat,'--SmartThemeShadowColor':p.shadow,'--SmartThemeBorderColor':p.border,'--SmartThemeCheckboxTickColor':p.tick};
- Object.entries(vars).forEach(([k,v])=>setVar(root,k,v,true));const isDark=s.palette==='ink-night'||s.palette==='violet-archive';
+ Object.entries(vars).forEach(([k,v])=>setVar(root,k,v,true));const isDark=s.palette==='ink-night'||s.palette==='violet-archive';document.body.classList.toggle('folio-light', !isDark);
   setVar(root,'--mz-plate-blend','normal',true);
   setVar(root,'--mz-plate-filter',isDark?'none':'var(--mz-day-plate-filter)',true);
  setVar(root,'--folio-role-ink',p.body);setVar(root,'--folio-aside-ink',p.em);setVar(root,'--folio-reading-surface',p.chat);setVar(root,'--folio-reading-line',p.border);setVar(root,'--folio-reading-ornament',p.accent);
