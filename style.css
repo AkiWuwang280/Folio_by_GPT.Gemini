@@ -88,3 +88,34 @@ body.folio-watermark::after {
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 420' fill='none' stroke='%23000'%3E%3Ccircle cx='286' cy='286' r='168' stroke-width='1' stroke-dasharray='180 34 62 24'/%3E%3Ccircle cx='286' cy='286' r='124' stroke-width='0.9' stroke-dasharray='96 28 140 42'/%3E%3Ccircle cx='286' cy='286' r='78' stroke-width='0.8' stroke-dasharray='48 18'/%3E%3Cpath d='M92 286 H408 M286 84 V408' stroke-width='0.6' stroke-dasharray='4 6'/%3E%3Cpath d='M230 326 V248 L286 294 L342 248 V326' stroke-width='1.35'/%3E%3Cpath d='M286 210 L294 218 L286 226 L278 218 Z' stroke-width='1'/%3E%3Cpath d='M138 352 L148 362 L138 372 L128 362 Z' stroke-width='0.9'/%3E%3Ccircle cx='138' cy='362' r='22' stroke-width='0.75' stroke-dasharray='18 10'/%3E%3Ccircle cx='230' cy='248' r='2.2' fill='%23000'/%3E%3Ccircle cx='342' cy='248' r='2.2' fill='%23000'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 #chat { position: relative; z-index: 1; }
+
+
+/* Folio icon assets — paths are relative to this extension stylesheet. */
+#top-settings-holder .drawer-icon::before,
+#options_button::before,
+#extensionsMenuButton::before,
+#send_but::before,
+#mes_stop::before { content: "" !important; }
+#top-settings-holder .drawer-icon,
+#options_button,
+#extensionsMenuButton,
+#send_but,
+#mes_stop {
+  font-size: 0 !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 76% 76% !important;
+}
+#top-settings-holder > .drawer:nth-child(1) .drawer-icon { background-image: url("icons/01_top_ai_config.png") !important; }
+#top-settings-holder > .drawer:nth-child(2) .drawer-icon { background-image: url("icons/02_top_api_connections.png") !important; }
+#top-settings-holder > .drawer:nth-child(3) .drawer-icon { background-image: url("icons/03_top_formatting_ui.png") !important; }
+#top-settings-holder > .drawer:nth-child(4) .drawer-icon { background-image: url("icons/04_top_world_info.png") !important; }
+#top-settings-holder > .drawer:nth-child(5) .drawer-icon { background-image: url("icons/05_top_user_settings.png") !important; }
+#top-settings-holder > .drawer:nth-child(6) .drawer-icon { background-image: url("icons/06_top_backgrounds.png") !important; }
+#top-settings-holder > .drawer:nth-child(7) .drawer-icon { background-image: url("icons/07_top_extensions.png") !important; }
+#top-settings-holder > .drawer:nth-child(8) .drawer-icon { background-image: url("icons/08_top_persona_memento.png") !important; }
+#top-settings-holder > .drawer:nth-child(9) .drawer-icon { background-image: url("icons/09_top_characters.png") !important; }
+#options_button { background-image: url("icons/10_bottom_options_menu.png") !important; }
+#extensionsMenuButton { background-image: url("icons/11_bottom_extensions_quill.png") !important; }
+#send_but { background-image: url("icons/12_bottom_send_letter.png") !important; }
+#mes_stop { background-image: url("icons/13_bottom_stop_seal.png") !important; }
