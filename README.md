@@ -1,46 +1,21 @@
 # 页序 · Folio
 
-一款面向 SillyTavern 的轻量阅读主题扩展。它优先保留酒馆原生交互，只对聊天消息排版和自己的设置面板施加样式。
+简约阅读主题与配套设置扩展。
 
-## 功能
+## 安装扩展
+在 SillyTavern → 扩展 → 安装扩展中粘贴：
+`https://github.com/AkiWuwang280/PaperTheme_by_gpt`
 
-- 四套配色：深紫夜刊、深灰夜刊、浅紫刊物、暖白纸刊。
-- 背景图片与配色独立设置，可通过 URL 指定背景图，并调整遮罩强度。
-- AI 与玩家字体独立设置。
-- 正文字号、行高、最大宽度、段落间距。
-- 头像尺寸、消息上下留白、头像与正文间距。
-- 细线框架、引用样式、章节分隔线、消息页码可独立开关。
-- 设置自动保存，并可恢复页序默认值。
-- 手机窄屏布局。
+仓库默认分支为稳定版，不需要填写分支名。
 
-## 安装
+## 导入 UI 主题
+首次安装后，在「用户设置 → UI 主题 → 导入主题文件」导入 `folio-theme.json`，主题就会出现在原生 UI 主题列表中。
+主题文件直链：https://raw.githubusercontent.com/AkiWuwang280/PaperTheme_by_gpt/main/folio-theme.json
 
-**请下载 Folio 分支压缩包，不要直接下载仓库默认分支（main）。**
+## 设计基准
+- SmartTheme 变量接管聊天区、抽屉、顶栏、输入区和弹窗配色。
+- 墨夜、暖纸、雾青、樱笺四套配色；背景图与配色独立。
+- 排版默认值参考原作者版式逻辑：头像 44px（手机 34px）、头像与正文间距 10px（手机 4px）、消息上/下留白 22px/36px（手机 18px/32px）、每行约 40 字、行高 1.95、段落间距 .75em。
+- 设置面板采用酒馆原生 inline-drawer，整体和各分组均可折叠。
 
-[下载页序 · Folio（folio-rebuild 分支 ZIP）](https://github.com/AkiWuwang280/PaperTheme_by_gpt/archive/refs/heads/folio-rebuild.zip)
-
-解压后，将文件夹重命名为 `PaperTheme_by_gpt`，放入：
-
-`public/scripts/extensions/third-party/PaperTheme_by_gpt/`
-
-确认 `manifest.json`、`index.js`、`style.css` 和 `settings.html` 直接位于该文件夹内，不要多套一层同名目录。刷新酒馆页面，在「扩展」设置中找到「页序 · Folio」。
-
-仓库的 `main` 分支仍保留旧版；本次新版只在 `folio-rebuild` 分支。
-
-## 使用说明
-
-1. 选择配色主题。
-2. 如需自定义背景，在背景图片 URL 中填入可被当前设备访问的图片地址。
-3. 调整排版、头像和消息间距。
-4. 按喜好启用或关闭阅读小版式。
-
-字体输入框填写设备或浏览器已安装的字体名称；留空时使用酒馆默认字体。
-
-## 兼容性与安全边界
-
-- 样式主要限定在 `#chat` 与 `#folio-settings`。
-- 不对 `body > *` 或酒馆全局容器强制设置 `position`、`z-index`。
-- 不重写抽屉、弹窗、输入框、角色列表等原生交互层。
-- 背景图片通过 `body` 的背景属性应用，不创建覆盖页面的固定遮罩层。
-
-本扩展是独立实现，不包含其他主题作者的 CSS 或专有代码。
+UI 主题 JSON 与扩展是酒馆的两套独立机制，因此主题 JSON 需要首次导入一次；扩展负责额外设置。
