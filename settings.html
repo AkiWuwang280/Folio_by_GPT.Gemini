@@ -1,90 +1,28 @@
 <div id="folio-settings" class="folio-settings">
-    <div class="folio-settings-heading">
-        <div>
-            <div class="folio-eyebrow">READING INTERFACE / 01</div>
-            <h3>页序 · Folio</h3>
-            <p>让聊天回到舒适、清晰的阅读节奏。</p>
-        </div>
-        <span class="folio-version">1.0</span>
-    </div>
-
-    <section class="folio-setting-section">
-        <h4>外观与配色</h4>
-        <div class="folio-setting-row">
-            <label for="folio-theme">配色主题</label>
-            <select id="folio-theme" data-folio-setting="theme">
-                <option value="night-violet">深紫夜刊</option>
-                <option value="night-graphite">深灰夜刊</option>
-                <option value="light-lilac">浅紫刊物</option>
-                <option value="warm-paper">暖白纸刊</option>
-            </select>
-        </div>
-        <div class="folio-setting-row folio-setting-stack">
-            <label for="folio-background-url">背景图片 URL <small>留空则不覆盖酒馆背景</small></label>
-            <input id="folio-background-url" type="url" data-folio-setting="backgroundUrl" placeholder="https://example.com/image.jpg">
-        </div>
-        <div class="folio-setting-row">
-            <label for="folio-background-opacity">背景遮罩强度 <output data-folio-output="backgroundOpacity">0.18</output></label>
-            <input id="folio-background-opacity" type="range" min="0" max="0.9" step="0.03" data-folio-setting="backgroundOpacity">
-        </div>
-        <p class="folio-hint">背景图与配色独立设置。遮罩用于降低背景对文字的干扰；图片以浏览器可访问的 HTTPS / HTTP 地址加载。</p>
-    </section>
-
-    <section class="folio-setting-section">
-        <h4>正文排版</h4>
-        <div class="folio-setting-row">
-            <label for="folio-font-size">字号 <output data-folio-output="fontSize">16</output> px</label>
-            <input id="folio-font-size" type="range" min="12" max="24" step="1" data-folio-setting="fontSize">
-        </div>
-        <div class="folio-setting-row">
-            <label for="folio-line-height">行高 <output data-folio-output="lineHeight">1.85</output></label>
-            <input id="folio-line-height" type="range" min="1.2" max="2.6" step="0.05" data-folio-setting="lineHeight">
-        </div>
-        <div class="folio-setting-row">
-            <label for="folio-content-width">正文最大宽度 <output data-folio-output="contentWidth">860</output> px</label>
-            <input id="folio-content-width" type="range" min="420" max="1400" step="20" data-folio-setting="contentWidth">
-        </div>
-        <div class="folio-setting-row folio-setting-stack">
-            <label for="folio-ai-font">AI 正文字体</label>
-            <input id="folio-ai-font" type="text" data-folio-setting="aiFont" placeholder="留空使用酒馆默认字体">
-        </div>
-        <div class="folio-setting-row folio-setting-stack">
-            <label for="folio-user-font">玩家正文字体</label>
-            <input id="folio-user-font" type="text" data-folio-setting="userFont" placeholder="留空使用酒馆默认字体">
-        </div>
-        <div class="folio-setting-row">
-            <label for="folio-paragraph-gap">段落间距 <output data-folio-output="paragraphGap">0.85</output> em</label>
-            <input id="folio-paragraph-gap" type="range" min="0" max="2" step="0.05" data-folio-setting="paragraphGap">
-        </div>
-    </section>
-
-    <section class="folio-setting-section">
-        <h4>消息与头像</h4>
-        <div class="folio-setting-row">
-            <label for="folio-avatar-size">头像尺寸 <output data-folio-output="avatarSize">42</output> px</label>
-            <input id="folio-avatar-size" type="range" min="28" max="88" step="2" data-folio-setting="avatarSize">
-        </div>
-        <div class="folio-setting-row">
-            <label for="folio-message-gap">消息上下留白 <output data-folio-output="messageGap">18</output> px</label>
-            <input id="folio-message-gap" type="range" min="0" max="48" step="2" data-folio-setting="messageGap">
-        </div>
-        <div class="folio-setting-row">
-            <label for="folio-avatar-gap">头像与正文间距 <output data-folio-output="avatarGap">14</output> px</label>
-            <input id="folio-avatar-gap" type="range" min="0" max="36" step="1" data-folio-setting="avatarGap">
-        </div>
-    </section>
-
-    <section class="folio-setting-section">
-        <h4>阅读小版式</h4>
-        <label class="folio-check-row"><input type="checkbox" data-folio-setting="borders"> 细线与消息框架</label>
-        <label class="folio-check-row"><input type="checkbox" data-folio-setting="quoteStyle"> 引文样式</label>
-        <label class="folio-check-row"><input type="checkbox" data-folio-setting="sectionDivider"> 章节分隔线</label>
-        <label class="folio-check-row"><input type="checkbox" data-folio-setting="pageNumber"> 消息页码标记</label>
-        <p class="folio-hint">这些装饰只作用于聊天消息区域，不会给酒馆的抽屉、弹窗或输入区强行套层级。</p>
-    </section>
-
-    <div class="folio-settings-footer">
-        <button id="folio-reset" type="button" class="menu_button">恢复页序默认值</button>
-        <span>设置自动保存</span>
-    </div>
+ <div class="inline-drawer">
+  <div class="inline-drawer-toggle inline-drawer-header"><b>页序 · Folio</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
+  <div class="inline-drawer-content">
+   <div class="folio-intro"><span class="folio-kicker">A QUIET READING INTERFACE</span><p>把聊天排成一页舒展、清晰的文字。</p><span class="folio-version">1.1.0</span></div>
+   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>主题配色</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
+    <label for="folio-palette">配色方案</label><select id="folio-palette" data-folio-setting="palette"><option value="ink-night">墨夜</option><option value="warm-paper">暖纸</option><option value="mist-water">雾青</option><option value="sakura">樱笺</option></select><p class="folio-hint">配色与背景图片独立设置。</p>
+   </div></div>
+   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>背景</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
+    <label for="folio-bg">背景图片地址</label><input id="folio-bg" type="url" data-folio-setting="backgroundUrl" placeholder="https://…">
+    <div class="folio-range-label"><label for="folio-opacity">背景遮罩</label><output data-folio-output="backgroundOpacity">0.22</output></div><input id="folio-opacity" type="range" min="0" max=".85" step=".01" data-folio-setting="backgroundOpacity"><p class="folio-hint">留空则不覆盖酒馆当前背景。</p>
+   </div></div>
+   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>字体与排版</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
+    <div class="folio-range-label"><label for="folio-size">正文字号比例</label><output data-folio-output="fontScale">1.06</output></div><input id="folio-size" type="range" min=".8" max="1.4" step=".01" data-folio-setting="fontScale">
+    <div class="folio-range-label"><label for="folio-line">行高</label><output data-folio-output="lineHeight">1.95</output></div><input id="folio-line" type="range" min="1.4" max="2.4" step=".05" data-folio-setting="lineHeight">
+    <div class="folio-range-label"><label for="folio-measure">每行字数上限</label><output data-folio-output="measure">40</output></div><input id="folio-measure" type="range" min="28" max="60" step="1" data-folio-setting="measure">
+    <div class="folio-range-label"><label for="folio-gap">段落间距</label><output data-folio-output="paragraphGap">0.75</output></div><input id="folio-gap" type="range" min="0" max="1.6" step=".05" data-folio-setting="paragraphGap">
+    <label for="folio-char-font">角色正文字体</label><input id="folio-char-font" type="text" data-folio-setting="charFont" placeholder="默认：宋体 / 衬线体">
+    <label for="folio-user-font">玩家正文字体</label><input id="folio-user-font" type="text" data-folio-setting="userFont" placeholder="默认：无衬线体">
+   </div></div>
+   <div class="inline-drawer folio-subdrawer"><div class="inline-drawer-toggle inline-drawer-header"><b>消息版式</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div><div class="inline-drawer-content">
+    <label class="folio-check"><input type="checkbox" data-folio-setting="pageNumbers"> 显示消息页码</label><label class="folio-check"><input type="checkbox" data-folio-setting="openingPage"> 首条消息采用扉页留白</label><label class="folio-check"><input type="checkbox" data-folio-setting="rules"> 显示页眉细线与页脚分隔</label>
+    <p class="folio-hint">头像、消息留白和头像与正文间距采用参考版式默认比例，窄屏自动收紧。</p>
+   </div></div>
+   <div class="folio-footer"><button id="folio-reset" type="button" class="menu_button">恢复默认设置</button><span>调整自动保存</span></div>
+  </div>
+ </div>
 </div>
