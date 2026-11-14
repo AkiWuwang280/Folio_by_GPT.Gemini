@@ -1,8 +1,8 @@
-/* Folio 1.3.2 — repair loader and watermark controls */
+/* Folio 1.3.4 — restrained drop cap, visible watermark and larger controls */
 (() => {
 'use strict';
 const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
-const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.08};
+const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.16};
 const PALETTES={
 'ink-night':{body:'#E0DCD4',em:'#9C978F',accent:'#E87046',quote:'#F6F3ED',panel:'rgba(27,26,24,.97)',chat:'rgba(20,19,18,.96)',shadow:'rgba(0,0,0,.45)',border:'rgba(224,220,212,.14)',tick:'#141312'},
 'warm-paper':{body:'#231F20',em:'#57524B',accent:'#7A5C2C',quote:'#0E0C0D',panel:'#F3F0E9',chat:'#FAF8F3',shadow:'rgba(40,30,20,.16)',border:'rgba(35,31,32,.34)',tick:'#FAF8F3'},
@@ -11,7 +11,7 @@ const PALETTES={
 'violet-archive':{body:'#E7E0F2',em:'#B7A9CC',accent:'#A98BD4',quote:'#F5EFFC',panel:'rgba(35,27,49,.97)',chat:'rgba(27,21,39,.97)',shadow:'rgba(8,4,16,.5)',border:'rgba(190,164,222,.2)',tick:'#1B1527'}};
 const FONTS={'noto-serif':'var(--mz-serif)','noto-sans':'var(--mz-sans)','kaiti':'var(--mz-kai)','system-serif':'serif','system-sans':'sans-serif'};
 const ctx=window.SillyTavern?.getContext?.();if(!ctx){console.warn('[Folio] ST context unavailable');return;}
-const all=ctx.extensionSettings??(ctx.extensionSettings={});all[KEY]??=structuredClone(DEFAULTS);const s=all[KEY];for(const[k,v]of Object.entries(DEFAULTS))if(s[k]===undefined)s[k]=v;
+const all=ctx.extensionSettings??(ctx.extensionSettings={});all[KEY]??=structuredClone(DEFAULTS);const s=all[KEY];for(const[k,v]of Object.entries(DEFAULTS))if(s[k]===undefined)s[k]=v;if(s.watermarkOpacity===.08)s.watermarkOpacity=.16;
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Number(v)||a));
 function setVar(root,key,value,important=false){root.style.setProperty(key,value,important?'important':'');}
 function apply(){
@@ -47,5 +47,5 @@ apply();bind();render();
 const mo=new MutationObserver(()=>{if(!document.getElementById('folio-settings'))render();});
 const host=document.getElementById('extensions_settings2');if(host)mo.observe(host,{childList:true});
 window.FolioTheme={apply,getSettings:()=>({...s}),reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.3.2 loaded');
+console.info('[Folio] 1.3.4 loaded');
 })();
