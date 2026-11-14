@@ -51,5 +51,5 @@ function bind(){
 }
 apply();bind();render();const mo=new MutationObserver(()=>{if(!document.getElementById('folio-settings'))render();});const host=document.getElementById('extensions_settings2');if(host)mo.observe(host,{childList:true});
 window.FolioTheme={apply,getSettings:()=>({...s}),reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.1.0 loaded');
+console.info('[Folio] 1.1.1 loaded');
 })();
