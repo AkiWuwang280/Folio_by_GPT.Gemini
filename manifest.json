@@ -1,10 +1,10 @@
 {
-  "display_name": "纸访主题 · Paper Theme",
+  "display_name": "页序 · Folio",
   "loading_order": 10,
   "js": "index.js",
   "css": "style.css",
   "author": "勿忘 & GPT",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homePage": "https://github.com/AkiWuwang280/PaperTheme_by_gpt",
-  "auto_update": true
+  "auto_update": false
 }
