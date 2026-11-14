@@ -1,7 +1,7 @@
 /* Folio 1.3.2 — repair loader and watermark controls */
 (() => {
 'use strict';
-const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
+const KEY='folio_theme', TEMPLATE='third-party/PaperTheme_by_gpt';
 const DEFAULTS={palette:'ink-night',backgroundUrl:'',backgroundOpacity:.22,fontScale:1.06,lineHeight:1.95,measure:40,paragraphGap:.75,charFont:'noto-serif',userFont:'noto-sans',pageNumbers:true,openingPage:true,rules:true,watermark:true,watermarkOpacity:.08};
 const PALETTES={
 'ink-night':{body:'#E0DCD4',em:'#9C978F',accent:'#E87046',quote:'#F6F3ED',panel:'rgba(27,26,24,.97)',chat:'rgba(20,19,18,.96)',shadow:'rgba(0,0,0,.45)',border:'rgba(224,220,212,.14)',tick:'#141312'},
@@ -30,7 +30,7 @@ function apply(){
  let image='';try{const u=new URL(String(s.backgroundUrl||'').trim());if(['http:','https:'].includes(u.protocol))image=u.href;}catch{}
  const tint=s.palette==='ink-night'?'12,11,10':s.palette==='warm-paper'?'250,248,243':s.palette==='mist-water'?'242,251,249':s.palette==='violet-archive'?'27,21,39':'255,249,250';
  const alpha=clamp(s.backgroundOpacity,0,.85);
- setVar(root,'--folio-wallpaper',image?`linear-gradient(rgba(${tint},${alpha}),rgba(${tint},${alpha})),url("${image.replace(/["\\]/g,'')}")`:'none');
+ setVar(root,'--folio-wallpaper',image?`linear-gradient(rgba(${tint},${alpha}),rgba(${tint},${alpha})),url("${image.replace(/["\\\\]/g,'')}")`:'none');
  document.body.classList.toggle('no-mesIDDisplay',!s.pageNumbers);
  document.body.classList.toggle('folio-opening-page',!!s.openingPage);
  document.body.classList.toggle('folio-rules',!!s.rules);document.body.classList.toggle('folio-watermark',!!s.watermark);
