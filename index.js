@@ -1,4 +1,4 @@
-/* Folio 1.3.8 — dedicated SVG watermark layer */
+/* Folio 1.3.9 — dedicated SVG watermark layer */
 (() => {
 'use strict';
 const KEY='folio_theme', TEMPLATE='third-party/Folio_by_GPT.Gemini';
@@ -78,5 +78,5 @@ const mo=new MutationObserver(()=>{
 });
 if(document.body)mo.observe(document.body,{childList:true,subtree:true});
 window.FolioTheme={apply,getSettings:()=>({...s}),getWatermarkStatus:()=>{const el=document.getElementById(WATERMARK_ID);return {exists:!!el,visible:!!el&&!el.hidden,opacity:el?.style.opacity??null,svg:!!el?.querySelector('svg'),parent:el?.parentElement?.id??null,rect:el?(()=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height,top:r.top,left:r.left}})():null};},reset:()=>{Object.assign(s,structuredClone(DEFAULTS));save();}};
-console.info('[Folio] 1.3.8 loaded');
+console.info('[Folio] 1.3.9 loaded');
 })();
