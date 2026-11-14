@@ -119,3 +119,28 @@ body.folio-watermark::after {
 #extensionsMenuButton { background-image: url("icons/11_bottom_extensions_quill.png") !important; }
 #send_but { background-image: url("icons/12_bottom_send_letter.png") !important; }
 #mes_stop { background-image: url("icons/13_bottom_stop_seal.png") !important; }
+/* 修复顶栏图标因 font-size:0 缩成小点的问题 */
+#top-settings-holder .drawer-icon {
+  display: inline-block !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  background-size: 24px 24px !important;
+  border-radius: 0 !important;
+  border: 1px solid color-mix(in srgb, var(--SmartThemeBorderColor) 75%, transparent) !important;
+  background-color: color-mix(in srgb, var(--SmartThemeBodyColor) 3%, transparent) !important;
+}
+#top-settings-holder .drawer-icon.openIcon,
+#top-settings-holder .drawer-icon:hover {
+  border-color: var(--SmartThemeUnderlineColor) !important;
+  background-color: color-mix(in srgb, var(--SmartThemeUnderlineColor) 12%, transparent) !important;
+  box-shadow: inset 0 -2px 0 var(--SmartThemeUnderlineColor) !important;
+}
+
+/* 统一底栏右侧可见的扩展/便签按钮外观（不影响隐藏按钮） */
+#rightSendForm > div,
+#rightSendForm > button {
+  color: var(--SmartThemeBodyColor) !important;
+  opacity: 0.78;
+}
