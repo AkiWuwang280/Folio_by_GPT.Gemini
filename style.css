@@ -24,19 +24,22 @@
 .folio-footer span{color:var(--SmartThemeEmColor);font-size:.78em}
 
 /* ===== Reading layout ===== */
-/* Symmetric reading column: compensate for the avatar rail without external theme variables. */
-#chat .mes{padding-left:14px!important;padding-right:14px!important;column-gap:4px!important}
-#chat .mes .mes_text{left:0!important;max-width:none!important;margin-top:26px!important;margin-left:-60px!important}
+/* Symmetric reading column: keep the avatar rail out of the full-width text area. */
+#chat .mes{position:relative!important;padding-left:14px!important;padding-right:14px!important}
+#chat .mes .mesAvatarWrapper{position:absolute!important;top:18px!important;left:14px!important;margin-right:0!important;z-index:2}
+#chat .mes .mes_block{width:100%!important;max-width:100%!important;margin-left:0!important}
+#chat .mes .ch_name{padding-left:60px!important;min-height:54px}
+#chat .mes .mes_text{left:0!important;max-width:none!important;margin-left:0!important}
 body:not(.no-mesIDDisplay) #chat .mes:not(.smallSysMes)::before{left:50%!important;transform:translateX(-50%)!important}
 @media screen and (max-width:1000px){
- #chat .mes .mes_text{margin-left:-44px!important}
+ #chat .mes .ch_name{padding-left:44px!important;min-height:46px}
 }
 
 
 /* Keep the opening-page initial restrained; cancel the theme's two-line raised initial. */
 #chat .mes[mesid="0"] .mes_text > p:first-child::first-letter,#chat .mes_text hr + p::first-letter{initial-letter:normal!important;font-size:1.3em!important;line-height:1!important;}
 body:not(.no-mesIDDisplay) #chat .mes:not(.smallSysMes)::before{content:"\25C7\2002" attr(mesid) "\2002\25C7";font-family:var(--mz-serif);font-size:calc(var(--mainFontSize) * .85);letter-spacing:.12em;width:min(220px,var(--mz-axis-w));left:calc(var(--mz-col) + var(--mz-axis-w) / 2);transform:translateX(-50%);background:linear-gradient(var(--mz-hairline),var(--mz-hairline)) left center/28% 1px no-repeat,linear-gradient(var(--mz-hairline),var(--mz-hairline)) right center/28% 1px no-repeat}
-body.folio-rules #chat .mes .mes_text{left:0;margin-top:10px!important;margin-bottom:16px!important;padding:12px 16px!important;border-top:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor));border-bottom:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor));background:linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/1px 10px no-repeat}
+body.folio-rules #chat .mes .mes_text{left:0;margin-top:22px!important;margin-bottom:16px!important;padding:12px 16px!important;border-top:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor));border-bottom:1px solid var(--folio-reading-line,var(--SmartThemeBorderColor));background:linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 0/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 0/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 0 100%/1px 10px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/10px 1px no-repeat,linear-gradient(var(--folio-reading-ornament),var(--folio-reading-ornament)) 100% 100%/1px 10px no-repeat}
 body.folio-rules #chat .mes .swipe_right,body.folio-rules #chat .mes .swipe_left{bottom:10px}
 body.folio-rules #chat .mes .swipes-counter{bottom:2px;font-family:var(--mz-mono);font-size:.72em;color:var(--mz-meta)}
 @media screen and (max-width:1000px){body.folio-rules #chat .mes .mes_text{padding:10px 12px!important}}
