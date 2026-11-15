@@ -3,7 +3,7 @@
   "loading_order": 10,
   "js": "index.js",
   "css": "style.css",
-  "author": "勿忘 & GPT",
+  "author": "勿忘, GPT & Gemini",
   "version": "1.4.2",
   "homePage": "https://github.com/AkiWuwang280/Folio_by_GPT.Gemini",
   "auto_update": true
