@@ -24,6 +24,15 @@
 .folio-footer span{color:var(--SmartThemeEmColor);font-size:.78em}
 
 /* ===== Reading layout ===== */
+/* Symmetric reading column: compensate for the avatar rail without external theme variables. */
+#chat .mes{padding-left:14px!important;padding-right:14px!important;column-gap:4px!important}
+#chat .mes .mes_text{left:0!important;max-width:none!important;margin-top:26px!important;margin-left:-60px!important}
+body:not(.no-mesIDDisplay) #chat .mes:not(.smallSysMes)::before{left:50%!important;transform:translateX(-50%)!important}
+@media screen and (max-width:1000px){
+ #chat .mes .mes_text{margin-left:-44px!important}
+}
+
+
 /* Keep the opening-page initial restrained; cancel the theme's two-line raised initial. */
 #chat .mes[mesid="0"] .mes_text > p:first-child::first-letter,#chat .mes_text hr + p::first-letter{initial-letter:normal!important;font-size:1.3em!important;line-height:1!important;}
 body:not(.no-mesIDDisplay) #chat .mes:not(.smallSysMes)::before{content:"\25C7\2002" attr(mesid) "\2002\25C7";font-family:var(--mz-serif);font-size:calc(var(--mainFontSize) * .85);letter-spacing:.12em;width:min(220px,var(--mz-axis-w));left:calc(var(--mz-col) + var(--mz-axis-w) / 2);transform:translateX(-50%);background:linear-gradient(var(--mz-hairline),var(--mz-hairline)) left center/28% 1px no-repeat,linear-gradient(var(--mz-hairline),var(--mz-hairline)) right center/28% 1px no-repeat}
